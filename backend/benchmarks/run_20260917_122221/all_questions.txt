@@ -1,0 +1,43 @@
+50-question benchmark
+Project: D:\Tayyab\AI\s_demo_text2sql_google - Copy
+Each question is independent; invokes the same /ask handler directly to capture terminal steps.
+PASS means expected status matched; SQL/result correctness requires manual review.
+Timeout: 180 seconds per question. This combined log is updated and flushed after each question.
+
+Question 1/50: How many guards are in the system?
+Expected status: ok
+[Request f5086d72] START | Processing question
+[Request f5086d72] Step 1: Resolve conversation context | START | LLM call: No
+[Request f5086d72] Step 1: Resolve conversation context | DONE | LLM call: No (0) | Embedding calls: 0 | Response time: 0.000s
+[Request f5086d72] Step 2: Analyze intent | START | LLM call: Yes
+[Request f5086d72] Step 2: LLM call 1 (IntentUnderstanding, attempt 1) | START
+[Request f5086d72] Step 2: LLM call 1 (IntentUnderstanding, attempt 1) | DONE | Response time: 6.544s
+[Request f5086d72] Step 2: Analyze intent | DONE | LLM call: Yes (1) | Embedding calls: 0 | Response time: 14.736s
+[Request f5086d72] Step 3: Make plan | START | LLM call: Yes
+[Request f5086d72] Step 3: LLM call 2 (QueryPlan, attempt 1) | START
+[Request f5086d72] Step 3: LLM call 2 (QueryPlan, attempt 1) | DONE | Response time: 12.338s
+[Request f5086d72] Step 3: Make plan | DONE | LLM call: Yes (1) | Embedding calls: 0 | Response time: 20.363s
+[Request f5086d72] Step 4: Retrieve | START | LLM call: No
+[Request f5086d72] Step 4: Embedding call 1 (1 texts) | START
+[Request f5086d72] Step 4: Embedding call 1 (1 texts) | DONE | Response time: 0.099s
+[Request f5086d72] Step 4: Retrieve | DONE | LLM call: No (0) | Embedding calls: 1 | Response time: 48.524s
+[Request f5086d72] Step 5: Generate | START | LLM call: Yes
+[Request f5086d72] Step 5: LLM call 3 (GeneratedSQL, attempt 1) | START
+[Request f5086d72] Step 5: LLM call 3 (GeneratedSQL, attempt 1) | DONE | Response time: 3.086s
+[Request f5086d72] Step 5: Generate | DONE | LLM call: Yes (1) | Embedding calls: 0 | Response time: 3.093s
+[Request f5086d72] Step 6: Validate | START | LLM call: Conditional (candidate judge)
+[Request f5086d72] Step 6: Validate | DONE | LLM call: No (0) | Embedding calls: 0 | Response time: 16.110s
+[Request f5086d72] Step 7: Repair | START | LLM call: Yes
+[Request f5086d72] Step 7: LLM call 4 (GeneratedSQL, attempt 1) | START
+
+BENCHMARK TIMEOUT: worker stopped after 180 seconds.
+
+BENCHMARK RESULT: FAIL | Actual: timeout | Wall time including worker startup: 180.053s
+
+================================================================================
+Question 2/50: List the first 10 guards with their first and last names.
+Expected status: ok
+
+BENCHMARK RESULT: FAIL | Actual: worker_error | Wall time including worker startup: 1.324s
+
+================================================================================

@@ -1,0 +1,10 @@
+.venv/
+backend/.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.sesskey
+**/.env
+backend/chroma_db/
+backend/admin/admin_schemas/
+backend/admin/schema_index_backup_*/

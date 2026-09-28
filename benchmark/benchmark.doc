@@ -1,0 +1,100 @@
+Which guards worked the highest total number of hours across all completed shifts, and for each guard show their total hours, number of completed shifts, total payroll amount, and average pay per worked hour?
+Find guards who were scheduled for a shift during a period in which their guard availability shows them as unavailable, considering both the availability start_at and end_at datetime values.
+Which guards have overlapping shifts where one shift starts before another assigned shift ends? Show both conflicting shift codes, site names, and overlap duration in minutes.
+Find every shift where the assigned guard clocked in more than 15 minutes after the scheduled start_at, and calculate the exact delay in minutes.
+Which guards have the highest late-attendance percentage among guards who have at least five attendance records?
+Calculate the attendance reliability score for every guard as: (present records / total attendance records) * 100, excluding pending attendance records.
+Find guards who have at least one absent or no_show attendance record but still have an approved payroll entry covering the same date period.
+Which sites have the highest percentage of shifts where the assigned guard arrived late, absent, or was a no-show?
+For each site, calculate scheduled guard hours, actual attendance hours, and the difference between scheduled and actual hours.
+Find all shifts where actual clock-in and clock-out times caused the guard to work longer than the scheduled shift duration.
+Which guards generated overtime according to timesheets but do not have corresponding payroll amounts that appear to include overtime compensation?
+Find guards whose average actual working hours per attendance record exceed their average scheduled shift hours.
+For every guard, compare total hours recorded in timesheets against total hours calculated from attendance.clock_in_at and clock_out_at, and identify discrepancies greater than one hour.
+Find scheduled shifts that have no corresponding attendance record and rank sites by the number of such missing attendance records.
+Which sites have the highest total number of scheduled guard-hours per month?
+Find guards assigned to more than three different sites and show their most frequently worked site.
+Determine which guard has worked at the largest number of unique sites.
+Find guards whose scheduled workload exceeds 48 hours within any rolling seven-day period.
+Which guards have worked more than one shift within the same calendar day at different sites?
+Find shifts where travel between the previous site and next site may be impossible because the second shift starts less than one hour after the first shift ends and the site IDs are different.
+Find guards whose SIA licence expired before or during a shift to which they were assigned.
+Find guards marked is_scheduling_blocked = 1 in guard_compliance who nevertheless have scheduled or completed shifts.
+Which guards have an expired SIA licence, DBS certificate, or right-to-work status but remain marked as active in the guards table?
+Find all guards whose SIA licence expires within 30 days after their next scheduled shift.
+Which guards have compliance status marked valid even though their corresponding expiry date is earlier than the current database date?
+Find guards who have approved documents whose expiry_date has already passed.
+Which guards have no record in guard_compliance despite being assigned to at least one shift?
+Find active guards who have no approved guard document and no valid training record.
+Which guards have training records expiring before their SIA licence expires?
+Find guards whose training status says valid but whose training expiry_date has already passed.
+Identify guards who have completed shifts but have no HR employee profile.
+Which active guards do not have any availability record for at least one day of the week?
+Find guards whose approved leave dates overlap one or more assigned shifts.
+Find guards whose guard_requests leave requests overlap shifts even though the request was rejected.
+Which guards requested a shift swap and were later still assigned to the original shift?
+Find shift swap requests where the requester and target guard have overlapping shifts at the proposed shift time.
+Identify approved leave requests where the employee's annual_leave_taken plus the requested days would exceed their annual leave allowance.
+Which guards have the highest ratio of leave days taken to annual leave allowance?
+Find guards whose employment status is not active but who still have future scheduled shifts.
+Which guards have availability marked unavailable but recorded telemetry showing on_patrol during that same datetime range?
+Find telemetry records where a guard is marked off_duty while also having an active scheduled shift.
+Which guards triggered an SOS alert during a shift, and what was their attendance status for that shift?
+Find guards with an active or acknowledged SOS alert who do not have any recent telemetry record.
+Which sites have had the highest number of SOS alerts per 100 completed shifts?
+Identify guards whose telemetry shows sos_alert patrol status but who have no corresponding record in sos_alerts.
+Find guards whose battery level dropped below 20 while they were marked on_patrol.
+For each guard, return their latest telemetry ping and calculate how long it has been since the previous telemetry ping.
+Identify guards with unusually long gaps between consecutive telemetry pings while marked on_patrol.
+Which guards have welfare check-ins marked overdue_alert while telemetry indicates they are still on patrol?
+Find guards whose latest welfare check-in exceeds their allowed interval_minutes but their status is still marked safe.
+Which sites have the highest number of incidents relative to the number of shifts worked at that site?
+Find sites where the number of high or critical incidents exceeds the number of low or medium incidents.
+Which guards have reported the most high-severity or critical incidents?
+Calculate the percentage of incidents resolved or closed for each site.
+Find sites where an incident remained open or investigating while later incidents at the same site were already resolved.
+Which sites have both unresolved incidents and unresolved high-severity hazard reports?
+Find guards who reported an incident and also logged a flagged patrol checkpoint at the same site on the same day.
+For each site, calculate the average number of patrol checkpoints logged per completed shift.
+Which guards have the highest percentage of flagged or missed patrol logs?
+Find guards who completed a shift but did not record any patrol checkpoint during the shift period.
+Find patrol logs whose scanned_at timestamp falls outside any scheduled shift for that guard and site.
+Identify sites where required guard count is greater than the number of assigned guards for scheduled shifts.
+Find sites that experienced a critical incident during a period where the number of assigned guards was below required_guard_count.
+Which sites had the largest difference between SLA target percentage and actual performance percentage?
+Find sites whose SLA status is compliant even though actual_performance_pct is below sla_target_pct.
+Rank sites by frequency of SLA breaches and calculate their average performance gap.
+Find whether sites with more incidents have lower SLA performance by showing incidents count alongside average SLA actual performance.
+Which clients have contracts covering sites whose SLA performance has fallen below the contractual site's target?
+Find active client contracts that have already passed their end_date.
+Identify contracts marked pending_renewal that expire within 60 days and show their site's latest SLA result.
+For every customer, calculate total invoiced amount, total number of invoices, average invoice amount, and number of overdue invoices.
+Which customers have invoices but no active site associated with them?
+Find invoices whose total_amount differs from hours_billed * rate by more than 1%.
+Rank customers by total invoiced revenue and calculate each customer's percentage contribution to overall revenue.
+Find customers where the total invoiced amount exceeds the apparent annual contract value associated with their site.
+Which sites have the highest estimated gross margin using invoice revenue minus payroll cost for guards working at those sites?
+Calculate estimated profit per site by comparing total guard payroll cost against customer invoice revenue.
+Find sites where payroll cost exceeds invoice revenue.
+Which guards generated the highest revenue-to-pay ratio based on the sites they worked and corresponding invoices?
+Compare average pay_rate from guards or payroll records against configured pay_rates for their sites and identify unusually large differences.
+Compare timesheet gross_pay with the amount calculated from regular hours, overtime hours, holiday hours, and configured pay rates, and return inconsistent records.
+Compare timesheet gross_charge with hours worked and configured client charge rates and identify discrepancies.
+Which sites produce the largest spread between client charge rates and guard pay rates?
+Calculate monthly total labor cost, total billed revenue, and estimated gross margin percentage.
+Compare the calculated labor cost from payroll entries with the total_labor_cost value stored in executive_bi_metrics for the same reporting period.
+Compare calculated invoice revenue against annual_recurring_revenue stored in executive BI metrics and report the difference.
+Find periods where the stored gross_profit_margin_pct metric differs materially from a margin calculated from invoice revenue and payroll cost.
+Which suppliers have the highest total purchase order value and the highest unpaid supplier invoice balance?
+Find purchase orders whose supplier invoice amount does not match the purchase order total amount.
+Which supplier invoices are overdue based on due_date but are not marked with status overdue?
+Find suppliers with approved or received purchase orders but no corresponding supplier invoice.
+Find supplier invoices referencing purchase orders belonging to a different supplier.
+Calculate the outstanding payable balance by supplier using unpaid, partial, and overdue supplier invoices.
+Which suppliers have the highest average purchase order amount, considering only suppliers with at least three purchase orders?
+Find guards whose performance rating is above the overall guard average but whose punctuality based on actual attendance is below the overall attendance average.
+Which guards have high performance-review scores but also have multiple late, absent, or no-show attendance records?
+Rank guards by a combined operational score using attendance reliability, performance-review rating, valid compliance status, and patrol completion rate, while returning the individual components rather than only the combined score.
+For each guard, produce a complete operational summary containing total shifts, completed shifts, attendance percentage, late count, total hours worked, payroll earnings, incident reports, flagged patrols, leave days, compliance status, training status, and latest performance rating.
+For each site, produce a management summary containing customer, total guards used, scheduled hours, actual worked hours, payroll cost, invoice revenue, estimated margin, incidents by severity, hazards by severity, patrol exceptions, SOS alerts, and latest SLA performance.
+Find the five most operationally anomalous guard-site-month combinations by considering simultaneously: scheduled hours versus actual attendance hours, late/absence frequency, payroll versus calculated pay, flagged/missed patrols, incidents reported, SOS alerts, compliance validity during shifts, leave conflicts, and availability conflicts; return all underlying metrics so the anomalies can be independently reviewed.

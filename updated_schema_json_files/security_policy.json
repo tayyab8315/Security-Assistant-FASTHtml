@@ -1,0 +1,20 @@
+{
+  "allowed_operations": [
+    "select",
+    "count",
+    "aggregate"
+  ],
+  "blocked_operations": [
+    "insert",
+    "update",
+    "delete",
+    "drop",
+    "alter",
+    "truncate"
+  ],
+  "blocked_columns": [
+    "password",
+    "token",
+    "token_hash"
+  ]
+}

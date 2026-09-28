@@ -1,0 +1,2234 @@
+{
+  "version": 1,
+  "description": "Display rules for the 39 policy-approved tables. These are presentation definitions, not query permissions or instructions for SQL filters.",
+  "sources": [
+    "admin/schema_catalog.json",
+    "domain/business_glossary.json",
+    "domain/security_policy.json"
+  ],
+  "defaults": {
+    "unmapped_columns": "preserve",
+    "unknown_values": "preserve",
+    "null_label": "Not provided",
+    "empty_string": "preserve",
+    "identifiers": "Preserve identifiers, codes, names, phone numbers and leading zeros exactly; do not replace numeric IDs with guessed names.",
+    "numbers": "Preserve numeric precision and returned units. Do not infer currency, percentages, boolean meanings or rating scales.",
+    "dates": "Preserve full dates and timestamps. Do not convert timezone unless the source timezone is established. Business timezone for interpreting questions does not establish the timezone of stored timestamps.",
+    "enums": "Apply only the exact table-and-column mapping. Labels improve readability but do not change the stored meaning.",
+    "provenance": "Apply mappings only when the output field is verified to originate from that source table and column. Resolve SQL aliases first. Do not apply status mappings to counts, totals, expressions or unrelated 0/1 fields.",
+    "raw_values": "Keep raw query results unchanged; display labels are a presentation layer. If the user asks for raw codes, show the original values.",
+    "security": "Security policy takes precedence. Never expose a blocked table or column. Display rules do not grant access."
+  },
+  "tables": {
+    "customers": {
+      "label": "Customers",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "customer": {
+          "label": "Customer",
+          "format": "preserve"
+        },
+        "customer_code": {
+          "label": "Customer code",
+          "format": "preserve"
+        },
+        "email": {
+          "label": "Email",
+          "format": "preserve"
+        },
+        "phone_number": {
+          "label": "Phone number",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "number",
+          "values": {
+            "0": "Inactive",
+            "1": "Active"
+          },
+          "source": "business_glossary.json: owner-approved numeric status rule",
+          "unknown_value": "preserve"
+        },
+        "address": {
+          "label": "Address",
+          "format": "preserve"
+        },
+        "photo_url": {
+          "label": "Photo URL",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "billing_rate": {
+          "label": "Billing rate",
+          "format": "preserve"
+        },
+        "contract_start": {
+          "label": "Contract start",
+          "format": "preserve"
+        },
+        "contract_end": {
+          "label": "Contract end",
+          "format": "preserve"
+        },
+        "sla_terms": {
+          "label": "SLA terms",
+          "format": "preserve"
+        }
+      }
+    },
+    "guards": {
+      "label": "Guards",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "first_name": {
+          "label": "First name",
+          "format": "preserve"
+        },
+        "last_name": {
+          "label": "Last name",
+          "format": "preserve"
+        },
+        "guard_code": {
+          "label": "Guard code",
+          "format": "preserve"
+        },
+        "email": {
+          "label": "Email",
+          "format": "preserve"
+        },
+        "gender": {
+          "label": "Gender",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "male": "Male",
+            "female": "Female",
+            "other": "Other"
+          },
+          "source": "schema_catalog.json: tables.guards.columns.gender",
+          "unknown_value": "preserve"
+        },
+        "dob": {
+          "label": "Dob",
+          "format": "preserve"
+        },
+        "phone_number": {
+          "label": "Phone number",
+          "format": "preserve"
+        },
+        "license_expiry": {
+          "label": "License expiry",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "number",
+          "values": {
+            "0": "Inactive",
+            "1": "Active"
+          },
+          "source": "business_glossary.json: owner-approved numeric status rule",
+          "unknown_value": "preserve"
+        },
+        "address": {
+          "label": "Address",
+          "format": "preserve"
+        },
+        "photo_url": {
+          "label": "Photo URL",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "employment_status": {
+          "label": "Employment status",
+          "format": "preserve"
+        },
+        "pay_rate": {
+          "label": "Pay rate",
+          "format": "preserve"
+        },
+        "skills": {
+          "label": "Skills",
+          "format": "preserve"
+        },
+        "availability_preferences": {
+          "label": "Availability preferences",
+          "format": "preserve"
+        }
+      }
+    },
+    "sites": {
+      "label": "Sites",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "site": {
+          "label": "Site",
+          "format": "preserve"
+        },
+        "site_code": {
+          "label": "Site code",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "number",
+          "values": {
+            "0": "Inactive",
+            "1": "Active"
+          },
+          "source": "business_glossary.json: owner-approved numeric status rule",
+          "unknown_value": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "customer_id": {
+          "label": "Customer ID",
+          "format": "preserve"
+        },
+        "address": {
+          "label": "Address",
+          "format": "preserve"
+        },
+        "latitude": {
+          "label": "Latitude",
+          "format": "preserve"
+        },
+        "longitude": {
+          "label": "Longitude",
+          "format": "preserve"
+        },
+        "instructions": {
+          "label": "Instructions",
+          "format": "preserve"
+        },
+        "required_guard_count": {
+          "label": "Required guard count",
+          "format": "preserve"
+        }
+      }
+    },
+    "users": {
+      "label": "Users",
+      "columns": {
+        "user_id": {
+          "label": "User ID",
+          "format": "preserve"
+        },
+        "user_code": {
+          "label": "User code",
+          "format": "preserve"
+        },
+        "name": {
+          "label": "Name",
+          "format": "preserve"
+        },
+        "email": {
+          "label": "Email",
+          "format": "preserve"
+        },
+        "role_type": {
+          "label": "Role type",
+          "format": "preserve",
+          "note": "Keep the numeric role code; named-role mappings have not been approved."
+        },
+        "photo_url": {
+          "label": "Photo URL",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "number",
+          "values": {
+            "0": "Inactive",
+            "1": "Active"
+          },
+          "source": "business_glossary.json: owner-approved numeric status rule",
+          "unknown_value": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "role_id": {
+          "label": "Role ID",
+          "format": "preserve"
+        }
+      }
+    },
+    "ai_operational_insights": {
+      "label": "AI operational insights",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "title": {
+          "label": "Title",
+          "format": "preserve"
+        },
+        "description": {
+          "label": "Description",
+          "format": "preserve"
+        },
+        "impact_level": {
+          "label": "Impact level",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low"
+          },
+          "source": "schema_catalog.json: tables.ai_operational_insights.columns.impact_level",
+          "unknown_value": "preserve"
+        },
+        "potential_savings": {
+          "label": "Potential savings",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "new": "New",
+            "actioned": "Actioned",
+            "dismissed": "Dismissed"
+          },
+          "source": "schema_catalog.json: tables.ai_operational_insights.columns.status",
+          "unknown_value": "preserve"
+        },
+        "generated_at": {
+          "label": "Generated at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Describe insights and potential savings as recorded estimates, not verified facts."
+      ]
+    },
+    "attendance": {
+      "label": "Attendance",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "shift_id": {
+          "label": "Shift ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "clock_in_at": {
+          "label": "Clock in at",
+          "format": "preserve"
+        },
+        "clock_out_at": {
+          "label": "Clock out at",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "pending": "Pending",
+            "present": "Present",
+            "late": "Late",
+            "absent": "Absent",
+            "no_show": "No show"
+          },
+          "source": "schema_catalog.json: tables.attendance.columns.status",
+          "unknown_value": "preserve"
+        },
+        "override_reason": {
+          "label": "Override reason",
+          "format": "preserve"
+        },
+        "check_in_latitude": {
+          "label": "Check in latitude",
+          "format": "preserve"
+        },
+        "check_in_longitude": {
+          "label": "Check in longitude",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "charge_rates": {
+      "label": "Charge rates",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "client_name": {
+          "label": "Client name",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "day_charge": {
+          "label": "Day charge",
+          "format": "preserve"
+        },
+        "night_charge": {
+          "label": "Night charge",
+          "format": "preserve"
+        },
+        "holiday_charge": {
+          "label": "Holiday charge",
+          "format": "preserve"
+        },
+        "overtime_charge": {
+          "label": "Overtime charge",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded rates with their returned precision; do not infer currency or billing units."
+      ]
+    },
+    "client_contracts": {
+      "label": "Client contracts",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "client_name": {
+          "label": "Client name",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "contract_title": {
+          "label": "Contract title",
+          "format": "preserve"
+        },
+        "start_date": {
+          "label": "Start date",
+          "format": "preserve"
+        },
+        "end_date": {
+          "label": "End date",
+          "format": "preserve"
+        },
+        "billing_cycle": {
+          "label": "Billing cycle",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "weekly": "Weekly",
+            "biweekly": "Biweekly",
+            "monthly": "Monthly"
+          },
+          "source": "schema_catalog.json: tables.client_contracts.columns.billing_cycle",
+          "unknown_value": "preserve"
+        },
+        "contract_value": {
+          "label": "Contract value",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "active": "Active",
+            "pending_renewal": "Pending renewal",
+            "expired": "Expired",
+            "cancelled": "Cancelled"
+          },
+          "source": "schema_catalog.json: tables.client_contracts.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "custom_forms": {
+      "label": "Custom forms",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "form_title": {
+          "label": "Form title",
+          "format": "preserve"
+        },
+        "category": {
+          "label": "Category",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "active": "Active",
+            "archived": "Archived"
+          },
+          "source": "schema_catalog.json: tables.custom_forms.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "executive_bi_metrics": {
+      "label": "Executive BI metrics",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "metric_key": {
+          "label": "Metric key",
+          "format": "preserve"
+        },
+        "metric_value": {
+          "label": "Metric value",
+          "format": "preserve"
+        },
+        "metric_category": {
+          "label": "Metric category",
+          "format": "preserve"
+        },
+        "period_date": {
+          "label": "Period date",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded metrics without inventing formulas, units, currency or rating scales."
+      ]
+    },
+    "guard_availabilities": {
+      "label": "Guard availabilities",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "day_of_week": {
+          "label": "Day of week",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "available": "Available",
+            "preferred": "Preferred",
+            "unavailable": "Unavailable"
+          },
+          "source": "schema_catalog.json: tables.guard_availabilities.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "start_at": {
+          "label": "Start at",
+          "format": "preserve"
+        },
+        "end_at": {
+          "label": "End at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display start_at and end_at as full dated timestamps. Do not describe windows as recurring weekly availability.",
+        "NULL boundaries do not establish availability; do not substitute default work hours.",
+        "Availability records alone do not establish absence of conflicting shifts."
+      ]
+    },
+    "guard_compliance": {
+      "label": "Guard compliance",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "sia_expiry_date": {
+          "label": "SIA expiry date",
+          "format": "preserve"
+        },
+        "sia_status": {
+          "label": "SIA status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "valid": "Valid",
+            "expiring_soon": "Expiring soon",
+            "expired": "Expired",
+            "unverified": "Unverified"
+          },
+          "source": "schema_catalog.json: tables.guard_compliance.columns.sia_status",
+          "unknown_value": "preserve"
+        },
+        "dbs_issue_date": {
+          "label": "DBS issue date",
+          "format": "preserve"
+        },
+        "dbs_status": {
+          "label": "DBS status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "valid": "Valid",
+            "expired": "Expired",
+            "unverified": "Unverified"
+          },
+          "source": "schema_catalog.json: tables.guard_compliance.columns.dbs_status",
+          "unknown_value": "preserve"
+        },
+        "right_to_work_type": {
+          "label": "Right to work type",
+          "format": "preserve"
+        },
+        "rtw_expiry_date": {
+          "label": "RTW expiry date",
+          "format": "preserve"
+        },
+        "rtw_status": {
+          "label": "RTW status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "valid": "Valid",
+            "expiring_soon": "Expiring soon",
+            "expired": "Expired",
+            "unverified": "Unverified"
+          },
+          "source": "schema_catalog.json: tables.guard_compliance.columns.rtw_status",
+          "unknown_value": "preserve"
+        },
+        "is_scheduling_blocked": {
+          "label": "Is scheduling blocked",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "guard_documents": {
+      "label": "Guard documents",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "document_type": {
+          "label": "Document type",
+          "format": "preserve"
+        },
+        "expiry_date": {
+          "label": "Expiry date",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "approved": "Approved",
+            "pending_review": "Pending review",
+            "expired": "Expired",
+            "rejected": "Rejected"
+          },
+          "source": "schema_catalog.json: tables.guard_documents.columns.status",
+          "unknown_value": "preserve"
+        },
+        "uploaded_at": {
+          "label": "Uploaded at",
+          "format": "preserve"
+        }
+      }
+    },
+    "guard_requests": {
+      "label": "Guard requests",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "type": {
+          "label": "Type",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "leave": "Leave",
+            "swap": "Swap"
+          },
+          "source": "schema_catalog.json: tables.guard_requests.columns.type",
+          "unknown_value": "preserve"
+        },
+        "shift_id": {
+          "label": "Shift ID",
+          "format": "preserve"
+        },
+        "target_shift_id": {
+          "label": "Target shift ID",
+          "format": "preserve"
+        },
+        "target_guard_id": {
+          "label": "Target guard ID",
+          "format": "preserve"
+        },
+        "start_date": {
+          "label": "Start date",
+          "format": "preserve"
+        },
+        "end_date": {
+          "label": "End date",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "pending": "Pending",
+            "approved": "Approved",
+            "rejected": "Rejected"
+          },
+          "source": "schema_catalog.json: tables.guard_requests.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "guard_telemetry": {
+      "label": "Guard telemetry",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "latitude": {
+          "label": "Latitude",
+          "format": "preserve"
+        },
+        "longitude": {
+          "label": "Longitude",
+          "format": "preserve"
+        },
+        "battery_level": {
+          "label": "Battery level",
+          "format": "preserve"
+        },
+        "patrol_status": {
+          "label": "Patrol status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "on_patrol": "On patrol",
+            "stationary": "Stationary",
+            "sos_alert": "Sos alert",
+            "off_duty": "Off duty"
+          },
+          "source": "schema_catalog.json: tables.guard_telemetry.columns.patrol_status",
+          "unknown_value": "preserve"
+        },
+        "speed_kmh": {
+          "label": "Speed kmh",
+          "format": "preserve"
+        },
+        "last_ping_at": {
+          "label": "Last ping at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Include last_ping_at when available; stored location or patrol status is not necessarily current."
+      ]
+    },
+    "hazard_reports": {
+      "label": "Hazard reports",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "hazard_code": {
+          "label": "Hazard code",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "title": {
+          "label": "Title",
+          "format": "preserve"
+        },
+        "hazard_type": {
+          "label": "Hazard type",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "slip_trip": "Slip trip",
+            "electrical": "Electrical",
+            "structural": "Structural",
+            "fire_hazard": "Fire hazard",
+            "lighting": "Lighting",
+            "chemical": "Chemical",
+            "other": "Other"
+          },
+          "source": "schema_catalog.json: tables.hazard_reports.columns.hazard_type",
+          "unknown_value": "preserve"
+        },
+        "severity": {
+          "label": "Severity",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "low": "Low",
+            "medium": "Medium",
+            "high": "High"
+          },
+          "source": "schema_catalog.json: tables.hazard_reports.columns.severity",
+          "unknown_value": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "open": "Open",
+            "mitigated": "Mitigated",
+            "resolved": "Resolved"
+          },
+          "source": "schema_catalog.json: tables.hazard_reports.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "hr_employee_profiles": {
+      "label": "Hr employee profiles",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "job_title": {
+          "label": "Job title",
+          "format": "preserve"
+        },
+        "employment_type": {
+          "label": "Employment type",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "full_time": "Full time",
+            "part_time": "Part time",
+            "zero_hours": "Zero hours",
+            "subcontractor": "Subcontractor"
+          },
+          "source": "schema_catalog.json: tables.hr_employee_profiles.columns.employment_type",
+          "unknown_value": "preserve"
+        },
+        "onboarding_status": {
+          "label": "Onboarding status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "invited": "Invited",
+            "in_progress": "In progress",
+            "completed": "Completed",
+            "verified": "Verified"
+          },
+          "source": "schema_catalog.json: tables.hr_employee_profiles.columns.onboarding_status",
+          "unknown_value": "preserve"
+        },
+        "annual_leave_allowance": {
+          "label": "Annual leave allowance",
+          "format": "preserve"
+        },
+        "annual_leave_taken": {
+          "label": "Annual leave taken",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "incidents": {
+      "label": "Incidents",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "incident_code": {
+          "label": "Incident code",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "reported_by_guard_id": {
+          "label": "Reported by guard ID",
+          "format": "preserve"
+        },
+        "title": {
+          "label": "Title",
+          "format": "preserve"
+        },
+        "category": {
+          "label": "Category",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "trespass": "Trespass",
+            "theft": "Theft",
+            "property_damage": "Property damage",
+            "medical": "Medical",
+            "fire": "Fire",
+            "unauthorized_access": "Unauthorized access",
+            "other": "Other"
+          },
+          "source": "schema_catalog.json: tables.incidents.columns.category",
+          "unknown_value": "preserve"
+        },
+        "severity": {
+          "label": "Severity",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "low": "Low",
+            "medium": "Medium",
+            "high": "High",
+            "critical": "Critical"
+          },
+          "source": "schema_catalog.json: tables.incidents.columns.severity",
+          "unknown_value": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "open": "Open",
+            "investigating": "Investigating",
+            "resolved": "Resolved",
+            "closed": "Closed"
+          },
+          "source": "schema_catalog.json: tables.incidents.columns.status",
+          "unknown_value": "preserve"
+        },
+        "description": {
+          "label": "Description",
+          "format": "preserve"
+        },
+        "location_details": {
+          "label": "Location details",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "invoices": {
+      "label": "Invoices",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "invoice_number": {
+          "label": "Invoice number",
+          "format": "preserve"
+        },
+        "customer_id": {
+          "label": "Customer ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "period_start": {
+          "label": "Period start",
+          "format": "preserve"
+        },
+        "period_end": {
+          "label": "Period end",
+          "format": "preserve"
+        },
+        "hours_billed": {
+          "label": "Hours billed",
+          "format": "preserve"
+        },
+        "rate": {
+          "label": "Rate",
+          "format": "preserve"
+        },
+        "total_amount": {
+          "label": "Total amount",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "draft": "Draft",
+            "issued": "Issued",
+            "paid": "Paid",
+            "overdue": "Overdue",
+            "void": "Void"
+          },
+          "source": "schema_catalog.json: tables.invoices.columns.status",
+          "unknown_value": "preserve"
+        },
+        "generated_from_attendance": {
+          "label": "Generated from attendance",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "leave_requests": {
+      "label": "Leave requests",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "leave_type": {
+          "label": "Leave type",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "annual_leave": "Annual leave",
+            "sick_leave": "Sick leave",
+            "unpaid": "Unpaid",
+            "compassionate": "Compassionate"
+          },
+          "source": "schema_catalog.json: tables.leave_requests.columns.leave_type",
+          "unknown_value": "preserve"
+        },
+        "start_date": {
+          "label": "Start date",
+          "format": "preserve"
+        },
+        "end_date": {
+          "label": "End date",
+          "format": "preserve"
+        },
+        "total_days": {
+          "label": "Total days",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "pending": "Pending",
+            "approved": "Approved",
+            "rejected": "Rejected"
+          },
+          "source": "schema_catalog.json: tables.leave_requests.columns.status",
+          "unknown_value": "preserve"
+        },
+        "approved_by": {
+          "label": "Approved by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "media_files": {
+      "label": "Media files",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "incident_id": {
+          "label": "Incident ID",
+          "format": "preserve"
+        },
+        "file_type": {
+          "label": "File type",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "image": "Image",
+            "video": "Video",
+            "document": "Document"
+          },
+          "source": "schema_catalog.json: tables.media_files.columns.file_type",
+          "unknown_value": "preserve"
+        },
+        "file_size": {
+          "label": "File size",
+          "format": "preserve"
+        },
+        "uploaded_by": {
+          "label": "Uploaded by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "patrol_logs": {
+      "label": "Patrol logs",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "checkpoint_name": {
+          "label": "Checkpoint name",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "passed": "Passed",
+            "missed": "Missed",
+            "flagged": "Flagged"
+          },
+          "source": "schema_catalog.json: tables.patrol_logs.columns.status",
+          "unknown_value": "preserve"
+        },
+        "scanned_at": {
+          "label": "Scanned at",
+          "format": "preserve"
+        },
+        "latitude": {
+          "label": "Latitude",
+          "format": "preserve"
+        },
+        "longitude": {
+          "label": "Longitude",
+          "format": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        }
+      }
+    },
+    "pay_rates": {
+      "label": "Pay rates",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "role_name": {
+          "label": "Role name",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "day_rate": {
+          "label": "Day rate",
+          "format": "preserve"
+        },
+        "night_rate": {
+          "label": "Night rate",
+          "format": "preserve"
+        },
+        "holiday_rate": {
+          "label": "Holiday rate",
+          "format": "preserve"
+        },
+        "overtime_rate": {
+          "label": "Overtime rate",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded rates with their returned precision; do not infer currency or calculate pay."
+      ]
+    },
+    "payroll_entries": {
+      "label": "Payroll entries",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "payroll_reference": {
+          "label": "Payroll reference",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "period_start": {
+          "label": "Period start",
+          "format": "preserve"
+        },
+        "period_end": {
+          "label": "Period end",
+          "format": "preserve"
+        },
+        "hours_worked": {
+          "label": "Hours worked",
+          "format": "preserve"
+        },
+        "pay_rate": {
+          "label": "Pay rate",
+          "format": "preserve"
+        },
+        "deductions": {
+          "label": "Deductions",
+          "format": "preserve"
+        },
+        "net_amount": {
+          "label": "Net amount",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "draft": "Draft",
+            "approved": "Approved",
+            "paid": "Paid"
+          },
+          "source": "schema_catalog.json: tables.payroll_entries.columns.status",
+          "unknown_value": "preserve"
+        },
+        "generated_from_attendance": {
+          "label": "Generated from attendance",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded amounts and hour categories without inventing pay formulas or currency."
+      ]
+    },
+    "performance_reviews": {
+      "label": "Performance reviews",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "reviewer_name": {
+          "label": "Reviewer name",
+          "format": "preserve"
+        },
+        "overall_rating": {
+          "label": "Overall rating",
+          "format": "preserve"
+        },
+        "punctuality_score": {
+          "label": "Punctuality score",
+          "format": "preserve"
+        },
+        "conduct_score": {
+          "label": "Conduct score",
+          "format": "preserve"
+        },
+        "review_date": {
+          "label": "Review date",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded ratings without assuming a scale or inferring performance categories."
+      ]
+    },
+    "purchase_orders": {
+      "label": "Purchase orders",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "po_number": {
+          "label": "Po number",
+          "format": "preserve"
+        },
+        "supplier_id": {
+          "label": "Supplier ID",
+          "format": "preserve"
+        },
+        "order_date": {
+          "label": "Order date",
+          "format": "preserve"
+        },
+        "total_amount": {
+          "label": "Total amount",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "draft": "Draft",
+            "approved": "Approved",
+            "received": "Received",
+            "cancelled": "Cancelled"
+          },
+          "source": "schema_catalog.json: tables.purchase_orders.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "shift_assignments": {
+      "label": "Shift assignments",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "shift_id": {
+          "label": "Shift ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display the recorded assignment; preserve guard_id and shift_id unless verified joined names are returned."
+      ]
+    },
+    "shift_swap_requests": {
+      "label": "Shift swap requests",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "shift_id": {
+          "label": "Shift ID",
+          "format": "preserve"
+        },
+        "requester_guard_id": {
+          "label": "Requester guard ID",
+          "format": "preserve"
+        },
+        "target_guard_id": {
+          "label": "Target guard ID",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "pending": "Pending",
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "cancelled": "Cancelled"
+          },
+          "source": "schema_catalog.json: tables.shift_swap_requests.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "shifts": {
+      "label": "Shifts",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "shift_code": {
+          "label": "Shift code",
+          "format": "preserve"
+        },
+        "start_at": {
+          "label": "Start at",
+          "format": "preserve"
+        },
+        "end_at": {
+          "label": "End at",
+          "format": "preserve"
+        },
+        "break_minutes": {
+          "label": "Break minutes",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "scheduled": "Scheduled",
+            "completed": "Completed",
+            "cancelled": "Cancelled",
+            "open": "Open"
+          },
+          "source": "schema_catalog.json: tables.shifts.columns.status",
+          "unknown_value": "preserve"
+        },
+        "instructions": {
+          "label": "Instructions",
+          "format": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Guard assignment information comes from shift_assignments, not obsolete shifts.guard_id."
+      ]
+    },
+    "site_sla_logs": {
+      "label": "Site SLA logs",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "site_name": {
+          "label": "Site name",
+          "format": "preserve"
+        },
+        "sla_target_pct": {
+          "label": "SLA target pct",
+          "format": "preserve"
+        },
+        "actual_performance_pct": {
+          "label": "Actual performance pct",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "compliant": "Compliant",
+            "warning": "Warning",
+            "breached": "Breached"
+          },
+          "source": "schema_catalog.json: tables.site_sla_logs.columns.status",
+          "unknown_value": "preserve"
+        },
+        "audited_date": {
+          "label": "Audited date",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "sos_alerts": {
+      "label": "Sos alerts",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "latitude": {
+          "label": "Latitude",
+          "format": "preserve"
+        },
+        "longitude": {
+          "label": "Longitude",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "active": "Active",
+            "acknowledged": "Acknowledged",
+            "resolved": "Resolved"
+          },
+          "source": "schema_catalog.json: tables.sos_alerts.columns.status",
+          "unknown_value": "preserve"
+        },
+        "triggered_at": {
+          "label": "Triggered at",
+          "format": "preserve"
+        },
+        "resolved_at": {
+          "label": "Resolved at",
+          "format": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        }
+      }
+    },
+    "subcontractors": {
+      "label": "Subcontractors",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "agency_name": {
+          "label": "Agency name",
+          "format": "preserve"
+        },
+        "contact_person": {
+          "label": "Contact person",
+          "format": "preserve"
+        },
+        "email": {
+          "label": "Email",
+          "format": "preserve"
+        },
+        "phone": {
+          "label": "Phone",
+          "format": "preserve"
+        },
+        "hourly_rate": {
+          "label": "Hourly rate",
+          "format": "preserve"
+        },
+        "active_guards_count": {
+          "label": "Active guards count",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "active": "Active",
+            "inactive": "Inactive"
+          },
+          "source": "schema_catalog.json: tables.subcontractors.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "supplier_invoices": {
+      "label": "Supplier invoices",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "invoice_number": {
+          "label": "Invoice number",
+          "format": "preserve"
+        },
+        "supplier_id": {
+          "label": "Supplier ID",
+          "format": "preserve"
+        },
+        "purchase_order_id": {
+          "label": "Purchase order ID",
+          "format": "preserve"
+        },
+        "invoice_date": {
+          "label": "Invoice date",
+          "format": "preserve"
+        },
+        "due_date": {
+          "label": "Due date",
+          "format": "preserve"
+        },
+        "amount": {
+          "label": "Amount",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "unpaid": "Unpaid",
+            "partial": "Partial",
+            "paid": "Paid",
+            "overdue": "Overdue"
+          },
+          "source": "schema_catalog.json: tables.supplier_invoices.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "suppliers": {
+      "label": "Suppliers",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "supplier_code": {
+          "label": "Supplier code",
+          "format": "preserve"
+        },
+        "supplier": {
+          "label": "Supplier",
+          "format": "preserve"
+        },
+        "email": {
+          "label": "Email",
+          "format": "preserve"
+        },
+        "phone_number": {
+          "label": "Phone number",
+          "format": "preserve"
+        },
+        "address": {
+          "label": "Address",
+          "format": "preserve"
+        },
+        "payment_terms": {
+          "label": "Payment terms",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "number",
+          "values": {
+            "0": "Inactive",
+            "1": "Active"
+          },
+          "source": "business_glossary.json: owner-approved numeric status rule",
+          "unknown_value": "preserve"
+        },
+        "created_by": {
+          "label": "Created by",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        },
+        "updated_by": {
+          "label": "Updated by",
+          "format": "preserve"
+        },
+        "updated_at": {
+          "label": "Updated at",
+          "format": "preserve"
+        }
+      }
+    },
+    "timesheets": {
+      "label": "Timesheets",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "shift_id": {
+          "label": "Shift ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "clock_in": {
+          "label": "Clock in",
+          "format": "preserve"
+        },
+        "clock_out": {
+          "label": "Clock out",
+          "format": "preserve"
+        },
+        "break_minutes": {
+          "label": "Break minutes",
+          "format": "preserve"
+        },
+        "regular_hours": {
+          "label": "Regular hours",
+          "format": "preserve"
+        },
+        "overtime_hours": {
+          "label": "Overtime hours",
+          "format": "preserve"
+        },
+        "holiday_hours": {
+          "label": "Holiday hours",
+          "format": "preserve"
+        },
+        "pay_rate": {
+          "label": "Pay rate",
+          "format": "preserve"
+        },
+        "charge_rate": {
+          "label": "Charge rate",
+          "format": "preserve"
+        },
+        "gross_pay": {
+          "label": "Gross pay",
+          "format": "preserve"
+        },
+        "gross_charge": {
+          "label": "Gross charge",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "draft": "Draft",
+            "submitted": "Submitted",
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "exported": "Exported"
+          },
+          "source": "schema_catalog.json: tables.timesheets.columns.status",
+          "unknown_value": "preserve"
+        },
+        "approved_by": {
+          "label": "Approved by",
+          "format": "preserve"
+        },
+        "approved_at": {
+          "label": "Approved at",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      },
+      "notes": [
+        "Display recorded hours and amounts; do not calculate unrequested overtime or pay."
+      ]
+    },
+    "training_records": {
+      "label": "Training records",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "course_name": {
+          "label": "Course name",
+          "format": "preserve"
+        },
+        "provider": {
+          "label": "Provider",
+          "format": "preserve"
+        },
+        "completion_date": {
+          "label": "Completion date",
+          "format": "preserve"
+        },
+        "expiry_date": {
+          "label": "Expiry date",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "valid": "Valid",
+            "expiring_soon": "Expiring soon",
+            "expired": "Expired"
+          },
+          "source": "schema_catalog.json: tables.training_records.columns.status",
+          "unknown_value": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "vehicle_inspections": {
+      "label": "Vehicle inspections",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "vehicle_plate": {
+          "label": "Vehicle plate",
+          "format": "preserve"
+        },
+        "vehicle_model": {
+          "label": "Vehicle model",
+          "format": "preserve"
+        },
+        "mileage": {
+          "label": "Mileage",
+          "format": "preserve"
+        },
+        "fuel_level": {
+          "label": "Fuel level",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "quarter": "Quarter",
+            "half": "Half",
+            "three_quarter": "Three quarter",
+            "full": "Full"
+          },
+          "source": "schema_catalog.json: tables.vehicle_inspections.columns.fuel_level",
+          "unknown_value": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "passed": "Passed",
+            "action_required": "Action required"
+          },
+          "source": "schema_catalog.json: tables.vehicle_inspections.columns.status",
+          "unknown_value": "preserve"
+        },
+        "inspection_notes": {
+          "label": "Inspection notes",
+          "format": "preserve"
+        },
+        "created_at": {
+          "label": "Created at",
+          "format": "preserve"
+        }
+      }
+    },
+    "visitor_logs": {
+      "label": "Visitor logs",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "site_id": {
+          "label": "Site ID",
+          "format": "preserve"
+        },
+        "visitor_name": {
+          "label": "Visitor name",
+          "format": "preserve"
+        },
+        "host_person": {
+          "label": "Host person",
+          "format": "preserve"
+        },
+        "company_name": {
+          "label": "Company name",
+          "format": "preserve"
+        },
+        "entry_time": {
+          "label": "Entry time",
+          "format": "preserve"
+        },
+        "exit_time": {
+          "label": "Exit time",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "checked_in": "Checked in",
+            "checked_out": "Checked out"
+          },
+          "source": "schema_catalog.json: tables.visitor_logs.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        }
+      }
+    },
+    "welfare_checkins": {
+      "label": "Welfare checkins",
+      "columns": {
+        "id": {
+          "label": "ID",
+          "format": "preserve"
+        },
+        "guard_id": {
+          "label": "Guard ID",
+          "format": "preserve"
+        },
+        "interval_minutes": {
+          "label": "Interval minutes",
+          "format": "preserve"
+        },
+        "last_ping_at": {
+          "label": "Last ping at",
+          "format": "preserve"
+        },
+        "status": {
+          "label": "Status",
+          "format": "value_map",
+          "value_type": "string",
+          "values": {
+            "safe": "Safe",
+            "checkin_due": "Checkin due",
+            "overdue_alert": "Overdue alert"
+          },
+          "source": "schema_catalog.json: tables.welfare_checkins.columns.status",
+          "unknown_value": "preserve"
+        },
+        "notes": {
+          "label": "Notes",
+          "format": "preserve"
+        }
+      }
+    }
+  }
+}

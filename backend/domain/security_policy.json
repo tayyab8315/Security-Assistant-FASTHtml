@@ -1,0 +1,230 @@
+{
+  "allowed_tables": [
+    "customers",
+    "guards",
+    "sites",
+    "users",
+    "ai_operational_insights",
+    "attendance",
+    "charge_rates",
+    "client_contracts",
+    "custom_forms",
+    "executive_bi_metrics",
+    "guard_availabilities",
+    "guard_compliance",
+    "guard_documents",
+    "guard_requests",
+    "guard_telemetry",
+    "hazard_reports",
+    "hr_employee_profiles",
+    "incidents",
+    "invoices",
+    "leave_requests",
+    "media_files",
+    "patrol_logs",
+    "pay_rates",
+    "payroll_entries",
+    "performance_reviews",
+    "purchase_orders",
+    "shift_assignments",
+    "shift_swap_requests",
+    "shifts",
+    "site_sla_logs",
+    "sos_alerts",
+    "subcontractors",
+    "supplier_invoices",
+    "suppliers",
+    "timesheets",
+    "training_records",
+    "vehicle_inspections",
+    "visitor_logs",
+    "welfare_checkins"
+  ],
+  "blocked_tables": [
+    "conversations",
+    "threads",
+    "auth_sessions",
+    "client_ai_conversations",
+    "finance_integrations",
+    "roles"
+  ],
+  "blocked_columns": {
+    "users": [
+      "password"
+    ],
+    "guards": [
+      "guard_passport",
+      "license_number",
+      "emergency_contact"
+    ],
+    "auth_sessions": [
+      "token_hash"
+    ],
+    "guard_compliance": [
+      "sia_license_number",
+      "dbs_certificate_number",
+      "notes"
+    ],
+    "hr_employee_profiles": [
+      "tax_code",
+      "bank_sort_code",
+      "bank_account_number",
+      "emergency_contact_name",
+      "emergency_contact_phone"
+    ],
+    "guard_documents": [
+      "document_name",
+      "file_url"
+    ],
+    "media_files": [
+      "file_name",
+      "file_url"
+    ],
+    "performance_reviews": [
+      "feedback"
+    ],
+    "leave_requests": [
+      "reason"
+    ],
+    "guard_requests": [
+      "reason"
+    ],
+    "shift_swap_requests": [
+      "reason",
+      "manager_note"
+    ],
+    "visitor_logs": [
+      "pass_number"
+    ],
+    "custom_forms": [
+      "fields_json"
+    ],
+    "finance_integrations": [
+      "config_json"
+    ],
+    "roles": [
+      "permissions",
+      "is_super_admin"
+    ],
+    "shifts": [
+      "guard_id"
+    ]
+  },
+  "sample_value_columns": {
+    "customers": [
+      "status"
+    ],
+    "guards": [
+      "gender",
+      "status"
+    ],
+    "sites": [
+      "site",
+      "status"
+    ],
+    "users": [
+      "role_type",
+      "status"
+    ],
+    "ai_operational_insights": [
+      "impact_level",
+      "status"
+    ],
+    "attendance": [
+      "status"
+    ],
+    "client_contracts": [
+      "billing_cycle",
+      "status"
+    ],
+    "custom_forms": [
+      "status"
+    ],
+    "guard_availabilities": [
+      "day_of_week",
+      "status"
+    ],
+    "guard_compliance": [
+      "sia_status",
+      "dbs_status",
+      "rtw_status"
+    ],
+    "guard_documents": [
+      "status"
+    ],
+    "guard_requests": [
+      "type",
+      "status"
+    ],
+    "guard_telemetry": [
+      "patrol_status"
+    ],
+    "hazard_reports": [
+      "hazard_type",
+      "severity",
+      "status"
+    ],
+    "hr_employee_profiles": [
+      "employment_type",
+      "onboarding_status"
+    ],
+    "incidents": [
+      "category",
+      "severity",
+      "status"
+    ],
+    "invoices": [
+      "status"
+    ],
+    "leave_requests": [
+      "leave_type",
+      "status"
+    ],
+    "media_files": [
+      "file_type"
+    ],
+    "patrol_logs": [
+      "status"
+    ],
+    "payroll_entries": [
+      "status"
+    ],
+    "purchase_orders": [
+      "status"
+    ],
+    "shift_swap_requests": [
+      "status"
+    ],
+    "shifts": [
+      "status"
+    ],
+    "site_sla_logs": [
+      "status"
+    ],
+    "sos_alerts": [
+      "status"
+    ],
+    "subcontractors": [
+      "status"
+    ],
+    "supplier_invoices": [
+      "status"
+    ],
+    "timesheets": [
+      "status"
+    ],
+    "training_records": [
+      "status"
+    ],
+    "vehicle_inspections": [
+      "fuel_level",
+      "status"
+    ],
+    "visitor_logs": [
+      "status"
+    ],
+    "welfare_checkins": [
+      "status"
+    ]
+  }
+}

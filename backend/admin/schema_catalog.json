@@ -1,0 +1,951 @@
+{
+  "database": "s_demo",
+  "notes": "Static fallback catalog updated from CREATE TABLE definitions in the supplied s_demo.sql. No row data imported. Runtime introspection determines which tables and columns actually exist.",
+  "excluded_tables": {
+    "conversations": "Conversation/message history - explicitly excluded by project requirement.",
+    "threads": "Conversation thread metadata - explicitly excluded by project requirement.",
+    "auth_sessions": "Authentication infrastructure containing session/token material; intentionally excluded from natural-language querying.",
+    "client_ai_conversations": "Stored user questions and AI conversation history; excluded consistently with other chat tables.",
+    "finance_integrations": "Integration configuration can contain credentials or tokens; excluded from natural-language queries.",
+    "roles": "Authorization definitions, permission JSON and super-admin configuration; excluded from natural-language queries."
+  },
+  "tables": {
+    "customers": {
+      "description": "Customer/client master records with identity, contact, address, status and audit information.",
+      "columns": {
+        "id": "Customer primary identifier.",
+        "customer": "Customer display/name field.",
+        "customer_code": "Customer code or UUID-like business identifier.",
+        "email": "Customer email address.",
+        "phone_number": "Customer phone number.",
+        "status": "Numeric status: 1 = active/unblock/unblocked; 0 = inactive/block/blocked. Filter with numeric values, not status words.",
+        "address": "Customer postal/location address.",
+        "photo_url": "Customer photo URL/path.",
+        "created_by": "User identifier that created the row.",
+        "created_at": "Creation timestamp.",
+        "updated_by": "User identifier that last updated the row.",
+        "updated_at": "Last update timestamp.",
+        "billing_rate": "Billing rate.",
+        "contract_start": "Contract start.",
+        "contract_end": "Contract end.",
+        "sla_terms": "Sla terms."
+      }
+    },
+    "guards": {
+      "description": "Security guard master records including identity, contact, license/passport, status and audit information.",
+      "columns": {
+        "id": "Guard primary identifier.",
+        "first_name": "Guard first name.",
+        "last_name": "Guard last name.",
+        "guard_code": "Guard code or UUID-like business identifier.",
+        "email": "Guard email address.",
+        "gender": "Guard gender value. Allowed values: male, female, other.",
+        "dob": "Guard date of birth.",
+        "phone_number": "Guard phone number.",
+        "guard_passport": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "license_number": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "license_expiry": "Guard license expiry date/time.",
+        "status": "Numeric status: 1 = active/unblock/unblocked; 0 = inactive/block/blocked. Filter with numeric values, not status words.",
+        "address": "Guard address.",
+        "photo_url": "Guard photo URL/path.",
+        "created_by": "User identifier that created the row.",
+        "created_at": "Creation timestamp.",
+        "updated_by": "User identifier that last updated the row.",
+        "updated_at": "Last update timestamp.",
+        "emergency_contact": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "employment_status": "Employment status.",
+        "pay_rate": "Pay rate.",
+        "skills": "Recorded guard skills as JSON; do not infer certifications from skill labels.",
+        "availability_preferences": "Availability preferences."
+      }
+    },
+    "sites": {
+      "description": "Security site/location master records with site name, code, status and audit information.",
+      "columns": {
+        "id": "Site primary identifier.",
+        "site": "Site/location display name.",
+        "site_code": "Site code or UUID-like business identifier.",
+        "status": "Numeric status: 1 = active/unblock/unblocked; 0 = inactive/block/blocked. Filter with numeric values, not status words.",
+        "created_by": "User identifier that created the row.",
+        "created_at": "Creation timestamp.",
+        "updated_by": "User identifier that last updated the row.",
+        "updated_at": "Last update timestamp.",
+        "customer_id": "Business-confirmed reference to customers.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "address": "Address.",
+        "latitude": "Latitude.",
+        "longitude": "Longitude.",
+        "instructions": "Instructions.",
+        "required_guard_count": "Required guard count."
+      }
+    },
+    "users": {
+      "description": "System user/account records including user code, name, email, role, status and audit information.",
+      "columns": {
+        "user_id": "System user primary identifier.",
+        "user_code": "User code or UUID-like business identifier.",
+        "name": "User display/full name.",
+        "email": "User email address.",
+        "password": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "role_type": "Numeric user role code (INT). No verified role-name mapping is provided; never compare to text such as admin.",
+        "photo_url": "User photo URL/path.",
+        "status": "Numeric status: 1 = active/unblock/unblocked; 0 = inactive/block/blocked. Filter with numeric values, not status words.",
+        "created_by": "User identifier that created the row.",
+        "created_at": "Creation timestamp.",
+        "updated_by": "User identifier that last updated the row.",
+        "updated_at": "Last update timestamp.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "role_id": "Recorded identifier; related table roles is restricted and must not be joined."
+      }
+    },
+    "ai_operational_insights": {
+      "description": "Stored AI-generated operational recommendations, impact and potential savings. These are recorded estimates, not verified savings or instructions.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "title": "Title.",
+        "description": "Description.",
+        "impact_level": "Impact level. Allowed values: high, medium, low.",
+        "potential_savings": "Recorded potential savings estimate; currency, period and realization are not defined.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: new, actioned, dismissed.",
+        "generated_at": "Generated at."
+      }
+    },
+    "attendance": {
+      "description": "Shift attendance records with clock-in/out timestamps and recorded attendance status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "shift_id": "Business-confirmed reference to shifts.id. Relationship: one_to_one; not a database-enforced foreign key.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "clock_in_at": "Clock in at.",
+        "clock_out_at": "Clock out at.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: pending, present, late, absent, no_show.",
+        "override_reason": "Override reason.",
+        "check_in_latitude": "Check in latitude.",
+        "check_in_longitude": "Check in longitude.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "charge_rates": {
+      "description": "Customer billing charge rates by client name and optional site, including day, night, holiday and overtime charges.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "client_name": "Client name.",
+        "site_id": "Recorded site identifier; foreign-key relationship is not declared in the dump.",
+        "day_charge": "Day charge.",
+        "night_charge": "Night charge.",
+        "holiday_charge": "Holiday charge.",
+        "overtime_charge": "Overtime charge.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "client_contracts": {
+      "description": "Client contracts with contract dates, billing cycle, recorded value and renewal status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "client_name": "Client name.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "contract_title": "Contract title.",
+        "start_date": "Start date.",
+        "end_date": "End date.",
+        "billing_cycle": "Billing cycle. Allowed values: weekly, biweekly, monthly.",
+        "contract_value": "Contract value.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: active, pending_renewal, expired, cancelled.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "custom_forms": {
+      "description": "Custom form definitions and categories; form metadata only, not submitted responses or company policy documents.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "form_title": "Form title.",
+        "category": "Category.",
+        "fields_json": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: active, archived.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "executive_bi_metrics": {
+      "description": "Stored executive business metrics by key, category and period. Units and calculation definitions require business confirmation.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "metric_key": "Metric key.",
+        "metric_value": "Stored metric value; units and calculation depend on metric_key and require confirmation.",
+        "metric_category": "Metric category.",
+        "period_date": "Period date.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "guard_availabilities": {
+      "description": "Dated guard availability windows using start_at and end_at DATETIME values, not recurring time-only schedules. The live unique key allows one row per guard_id and day_of_week.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "day_of_week": "Recorded weekday enum: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Use the full start_at/end_at timestamps for date-specific queries; weekday alone is insufficient.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: available, preferred, unavailable.",
+        "notes": "Notes.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp.",
+        "start_at": "Nullable DATETIME marking the full calendar date and start of the recorded availability window. NULL does not establish a start.",
+        "end_at": "Nullable DATETIME marking the full calendar date and end of the recorded availability window, possibly on a later date. NULL does not establish an end."
+      }
+    },
+    "guard_compliance": {
+      "description": "Guard compliance statuses and expiry dates for SIA, DBS and right-to-work checks; document numbers and private notes are restricted.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: one_to_one; not a database-enforced foreign key.",
+        "sia_license_number": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "sia_expiry_date": "Sia expiry date.",
+        "sia_status": "Sia status. Allowed values: valid, expiring_soon, expired, unverified.",
+        "dbs_certificate_number": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "dbs_issue_date": "Dbs issue date.",
+        "dbs_status": "Dbs status. Allowed values: valid, expired, unverified.",
+        "right_to_work_type": "Right to work type.",
+        "rtw_expiry_date": "Rtw expiry date.",
+        "rtw_status": "Rtw status. Allowed values: valid, expiring_soon, expired, unverified.",
+        "is_scheduling_blocked": "Recorded scheduling-block flag: 1 blocked, 0 not blocked.",
+        "notes": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "guard_documents": {
+      "description": "Guard document metadata, types, review status and expiry dates; document names and download URLs are restricted.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "document_type": "Document type.",
+        "document_name": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "file_url": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "expiry_date": "Expiry date.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: approved, pending_review, expired, rejected.",
+        "uploaded_at": "Uploaded at."
+      }
+    },
+    "guard_requests": {
+      "description": "General guard leave and shift-swap requests, requested dates and approval status; distinct from dedicated leave_requests and shift_swap_requests.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "type": "Type. Allowed values: leave, swap.",
+        "shift_id": "Business-confirmed reference to shifts.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "target_shift_id": "Target shift id. Identifier relationship is not declared; do not infer joins.",
+        "target_guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "start_date": "Start date.",
+        "end_date": "End date.",
+        "reason": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: pending, approved, rejected.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "guard_telemetry": {
+      "description": "Recorded guard device telemetry including location, patrol status, battery and last ping. Not necessarily current; report last_ping_at.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "latitude": "Latitude.",
+        "longitude": "Longitude.",
+        "battery_level": "Battery level.",
+        "patrol_status": "Patrol status. Allowed values: on_patrol, stationary, sos_alert, off_duty.",
+        "speed_kmh": "Speed kmh.",
+        "last_ping_at": "Last ping at."
+      }
+    },
+    "hazard_reports": {
+      "description": "Site hazard reports with hazard category, severity and mitigation status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "hazard_code": "Hazard code.",
+        "site_id": "Recorded site identifier; foreign-key relationship is not declared in the dump.",
+        "guard_id": "Recorded guard identifier; foreign-key relationship is not declared in the dump.",
+        "title": "Title.",
+        "hazard_type": "Hazard type. Allowed values: slip_trip, electrical, structural, fire_hazard, lighting, chemical, other.",
+        "severity": "Severity. Allowed values: low, medium, high.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: open, mitigated, resolved.",
+        "notes": "Notes.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "hr_employee_profiles": {
+      "description": "Guard employment profiles with job title, employment type, onboarding and recorded leave allowances; banking, tax and emergency contacts are restricted.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Recorded guard identifier; foreign-key relationship is not declared in the dump.",
+        "job_title": "Job title.",
+        "tax_code": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "bank_sort_code": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "bank_account_number": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "emergency_contact_name": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "emergency_contact_phone": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "employment_type": "Employment type. Allowed values: full_time, part_time, zero_hours, subcontractor.",
+        "onboarding_status": "Onboarding status. Allowed values: invited, in_progress, completed, verified.",
+        "annual_leave_allowance": "Annual leave allowance.",
+        "annual_leave_taken": "Annual leave taken.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "incidents": {
+      "description": "Security incident records with category, severity, status, reported guard identifier and location details.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "incident_code": "Incident code.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "reported_by_guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "title": "Title.",
+        "category": "Category. Allowed values: trespass, theft, property_damage, medical, fire, unauthorized_access, other.",
+        "severity": "Severity. Allowed values: low, medium, high, critical.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: open, investigating, resolved, closed.",
+        "description": "Description.",
+        "location_details": "Location details.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "invoices": {
+      "description": "Customer sales invoices with billing periods, billed hours, rates, total amounts and payment status; distinct from supplier invoices.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "invoice_number": "Invoice number.",
+        "customer_id": "Business-confirmed reference to customers.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "period_start": "Period start.",
+        "period_end": "Period end.",
+        "hours_billed": "Hours billed.",
+        "rate": "Rate.",
+        "total_amount": "Total amount.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: draft, issued, paid, overdue, void.",
+        "generated_from_attendance": "Recorded flag indicating whether generated from attendance: 1 yes, 0 no.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "leave_requests": {
+      "description": "Dedicated guard leave requests with leave type, dates, total days and approval status; private reasons are restricted.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "leave_type": "Leave type. Allowed values: annual_leave, sick_leave, unpaid, compassionate.",
+        "start_date": "Start date.",
+        "end_date": "End date.",
+        "total_days": "Total days.",
+        "reason": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: pending, approved, rejected.",
+        "approved_by": "Approved by.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "media_files": {
+      "description": "Incident attachment metadata including media type and size; file names and direct URLs are restricted. Does not provide file contents.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "incident_id": "Business-confirmed reference to incidents.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "file_name": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "file_type": "File type. Allowed values: image, video, document.",
+        "file_url": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "file_size": "File size.",
+        "uploaded_by": "Uploaded by.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "patrol_logs": {
+      "description": "Patrol checkpoint scan records with timestamps, coordinates and passed, missed or flagged status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "checkpoint_name": "Checkpoint name.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: passed, missed, flagged.",
+        "scanned_at": "Scanned at.",
+        "latitude": "Latitude.",
+        "longitude": "Longitude.",
+        "notes": "Notes."
+      }
+    },
+    "pay_rates": {
+      "description": "Guard pay-rate schedule by role name and optional site, including day, night, holiday and overtime rates.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "role_name": "Role name.",
+        "site_id": "Recorded site identifier; foreign-key relationship is not declared in the dump.",
+        "day_rate": "Day rate.",
+        "night_rate": "Night rate.",
+        "holiday_rate": "Holiday rate.",
+        "overtime_rate": "Overtime rate.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "payroll_entries": {
+      "description": "Recorded guard payroll entries by pay period, hours, rate, deductions and net amount. No banking details.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "payroll_reference": "Payroll reference.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "period_start": "Period start.",
+        "period_end": "Period end.",
+        "hours_worked": "Hours worked.",
+        "pay_rate": "Pay rate.",
+        "deductions": "Deductions.",
+        "net_amount": "Net amount.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: draft, approved, paid.",
+        "generated_from_attendance": "Recorded flag indicating whether generated from attendance: 1 yes, 0 no.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "performance_reviews": {
+      "description": "Recorded guard performance ratings and review dates; confidential narrative feedback is restricted. Rating scale is not documented.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "reviewer_name": "Reviewer name.",
+        "overall_rating": "Overall rating.",
+        "punctuality_score": "Punctuality score.",
+        "conduct_score": "Conduct score.",
+        "feedback": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "review_date": "Review date."
+      }
+    },
+    "purchase_orders": {
+      "description": "Supplier purchase orders with order dates, recorded totals and approval or receipt status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "po_number": "Po number.",
+        "supplier_id": "Business-confirmed reference to suppliers.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "order_date": "Order date.",
+        "total_amount": "Total amount.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: draft, approved, received, cancelled.",
+        "notes": "Notes.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "shift_assignments": {
+      "description": "Authoritative guard assignment records linking shift_id to shifts.id and guard_id to guards.id. Use this table for assigned and unassigned shifts.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "shift_id": "Business-confirmed reference to shifts.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "shift_swap_requests": {
+      "description": "Dedicated shift-swap requests with requesting and target guard identifiers and approval status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "shift_id": "Business-confirmed reference to shifts.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "requester_guard_id": "Requester guard id. Identifier relationship is not declared; do not infer joins.",
+        "target_guard_id": "Target guard id. Identifier relationship is not declared; do not infer joins.",
+        "reason": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: pending, approved, rejected, cancelled.",
+        "manager_note": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "shifts": {
+      "description": "Scheduled security shifts with site_id, start/end times, breaks and recorded shift status. Guard assignments are stored only in shift_assignments.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "shift_code": "Shift code.",
+        "start_at": "Start at.",
+        "end_at": "End at.",
+        "break_minutes": "Break minutes.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: scheduled, completed, cancelled, open.",
+        "instructions": "Instructions.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp.",
+        "site_id": "Site for this shift; joins sites.id. Use shift_assignments for the assigned guard."
+      }
+    },
+    "site_sla_logs": {
+      "description": "Recorded site service-level audits with target and actual performance percentages and compliance status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "site_name": "Site name.",
+        "sla_target_pct": "Sla target pct.",
+        "actual_performance_pct": "Actual performance pct.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: compliant, warning, breached.",
+        "audited_date": "Audited date.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "sos_alerts": {
+      "description": "Guard emergency alerts with recorded coordinates, trigger/resolution times and status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Recorded guard identifier; foreign-key relationship is not declared in the dump.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "latitude": "Latitude.",
+        "longitude": "Longitude.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: active, acknowledged, resolved.",
+        "triggered_at": "Triggered at.",
+        "resolved_at": "Resolved at.",
+        "notes": "Notes."
+      }
+    },
+    "subcontractors": {
+      "description": "Subcontractor agencies with business contacts, hourly rates and recorded active guard counts.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "agency_name": "Agency name.",
+        "contact_person": "Contact person.",
+        "email": "Email.",
+        "phone": "Phone.",
+        "hourly_rate": "Hourly rate.",
+        "active_guards_count": "Active guards count.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: active, inactive.",
+        "notes": "Notes.",
+        "created_at": "Record creation timestamp.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "supplier_invoices": {
+      "description": "Supplier purchase invoices with due dates, amounts and payment status; distinct from customer sales invoices.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "invoice_number": "Invoice number.",
+        "supplier_id": "Business-confirmed reference to suppliers.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "purchase_order_id": "Business-confirmed reference to purchase_orders.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "invoice_date": "Invoice date.",
+        "due_date": "Due date.",
+        "amount": "Amount.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: unpaid, partial, paid, overdue.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "suppliers": {
+      "description": "Supplier master records with business contact details, payment terms and numeric status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "supplier_code": "Supplier code.",
+        "supplier": "Supplier.",
+        "email": "Email.",
+        "phone_number": "Phone number.",
+        "address": "Address.",
+        "payment_terms": "Payment terms.",
+        "status": "Numeric status: 1 = active/unblock/unblocked; 0 = inactive/block/blocked. Filter with numeric values, not status words.",
+        "created_by": "Recorded creator identifier; relationship not declared.",
+        "created_at": "Record creation timestamp.",
+        "updated_by": "Recorded updater identifier; relationship not declared.",
+        "updated_at": "Last record update timestamp."
+      }
+    },
+    "timesheets": {
+      "description": "Recorded work timesheets with clock times, breaks, hour categories, pay/charge rates, gross amounts and approval status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "shift_id": "Business-confirmed reference to shifts.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "guard_id": "Recorded guard identifier; foreign-key relationship is not declared in the dump.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "clock_in": "Clock in.",
+        "clock_out": "Clock out.",
+        "break_minutes": "Break minutes.",
+        "regular_hours": "Regular hours.",
+        "overtime_hours": "Overtime hours.",
+        "holiday_hours": "Holiday hours.",
+        "pay_rate": "Pay rate.",
+        "charge_rate": "Charge rate.",
+        "gross_pay": "Gross pay.",
+        "gross_charge": "Gross charge.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: draft, submitted, approved, rejected, exported.",
+        "approved_by": "Approved by.",
+        "approved_at": "Approved at.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "training_records": {
+      "description": "Guard training course records with providers, completion dates, expiry dates and recorded certification status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "course_name": "Course name.",
+        "provider": "Provider.",
+        "completion_date": "Completion date.",
+        "expiry_date": "Expiry date.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: valid, expiring_soon, expired.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "vehicle_inspections": {
+      "description": "Vehicle inspection records with vehicle details, mileage, fuel level and inspection status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "vehicle_plate": "Vehicle plate.",
+        "vehicle_model": "Vehicle model.",
+        "mileage": "Mileage.",
+        "fuel_level": "Fuel level. Allowed values: quarter, half, three_quarter, full.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: passed, action_required.",
+        "inspection_notes": "Inspection notes.",
+        "created_at": "Record creation timestamp."
+      }
+    },
+    "visitor_logs": {
+      "description": "Site visitor register with host, company, entry/exit times and status; visitor pass numbers are restricted.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "site_id": "Business-confirmed reference to sites.id. Relationship: many_to_one; not a database-enforced foreign key.",
+        "visitor_name": "Visitor name.",
+        "pass_number": "Sensitive field; blocked from schema retrieval and generated queries.",
+        "host_person": "Host person.",
+        "company_name": "Company name.",
+        "entry_time": "Entry time.",
+        "exit_time": "Exit time.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: checked_in, checked_out.",
+        "notes": "Notes."
+      }
+    },
+    "welfare_checkins": {
+      "description": "Guard welfare check-in records with check interval, last ping and recorded alert status.",
+      "columns": {
+        "id": "Primary row identifier.",
+        "guard_id": "Business-confirmed reference to guards.id. Relationship: one_to_one; not a database-enforced foreign key.",
+        "interval_minutes": "Interval minutes.",
+        "last_ping_at": "Last ping at.",
+        "status": "Recorded status; use documented enum literals. Do not infer numeric status meanings. Allowed values: safe, checkin_due, overdue_alert.",
+        "notes": "Notes."
+      }
+    }
+  },
+  "relationships": [
+    {
+      "from_table": "sites",
+      "from_column": "customer_id",
+      "to_table": "customers",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "client_contracts",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "invoices",
+      "from_column": "customer_id",
+      "to_table": "customers",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "attendance",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_availabilities",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_compliance",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "one_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_documents",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_requests",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_requests",
+      "from_column": "target_guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_telemetry",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "incidents",
+      "from_column": "reported_by_guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "leave_requests",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "payroll_entries",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "performance_reviews",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "patrol_logs",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "shift_assignments",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "training_records",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "vehicle_inspections",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "welfare_checkins",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "one_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "attendance",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "incidents",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "patrol_logs",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "timesheets",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "visitor_logs",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "sos_alerts",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "site_sla_logs",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "invoices",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "attendance",
+      "from_column": "shift_id",
+      "to_table": "shifts",
+      "to_column": "id",
+      "type": "one_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "shift_assignments",
+      "from_column": "shift_id",
+      "to_table": "shifts",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "guard_requests",
+      "from_column": "shift_id",
+      "to_table": "shifts",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "timesheets",
+      "from_column": "shift_id",
+      "to_table": "shifts",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "shift_swap_requests",
+      "from_column": "shift_id",
+      "to_table": "shifts",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "media_files",
+      "from_column": "incident_id",
+      "to_table": "incidents",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "purchase_orders",
+      "from_column": "supplier_id",
+      "to_table": "suppliers",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "supplier_invoices",
+      "from_column": "supplier_id",
+      "to_table": "suppliers",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "supplier_invoices",
+      "from_column": "purchase_order_id",
+      "to_table": "purchase_orders",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "client_ai_conversations",
+      "from_column": "user_id",
+      "to_table": "users",
+      "to_column": "user_id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "users",
+      "from_column": "role_id",
+      "to_table": "roles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "users",
+      "from_column": "guard_id",
+      "to_table": "guards",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    },
+    {
+      "from_table": "shifts",
+      "from_column": "site_id",
+      "to_table": "sites",
+      "to_column": "id",
+      "type": "many_to_one",
+      "verified_by": "business_schema"
+    }
+  ],
+  "relationship_note": "Relationships marked business_schema were explicitly confirmed by the application owner and checked against dump/live column types and unique parent keys. They are semantic join rules, not database foreign keys. Runtime policy filters restricted or missing endpoints. No unlisted join is implied."
+}

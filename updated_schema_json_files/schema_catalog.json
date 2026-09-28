@@ -1,0 +1,697 @@
+{
+  "tables": {
+    "ai_operational_insights": {
+      "description": "Ai Operational Insights information and operational records.",
+      "columns": [
+        "id",
+        "title",
+        "description",
+        "impact_level",
+        "potential_savings",
+        "status",
+        "generated_at"
+      ],
+      "foreign_keys": []
+    },
+    "attendance": {
+      "description": "Attendance information and operational records.",
+      "columns": [
+        "id",
+        "shift_id",
+        "guard_id",
+        "site_id",
+        "clock_in_at",
+        "clock_out_at",
+        "status",
+        "override_reason",
+        "check_in_latitude",
+        "check_in_longitude",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "charge_rates": {
+      "description": "Charge Rates information and operational records.",
+      "columns": [
+        "id",
+        "client_name",
+        "site_id",
+        "day_charge",
+        "night_charge",
+        "holiday_charge",
+        "overtime_charge",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "client_ai_conversations": {
+      "description": "Client Ai Conversations information and operational records.",
+      "columns": [
+        "id",
+        "user_id",
+        "user_query",
+        "ai_response",
+        "intent",
+        "retrieved_doc_url",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "client_contracts": {
+      "description": "Client Contracts information and operational records.",
+      "columns": [
+        "id",
+        "client_name",
+        "site_id",
+        "contract_title",
+        "start_date",
+        "end_date",
+        "billing_cycle",
+        "contract_value",
+        "status",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "custom_forms": {
+      "description": "Custom Forms information and operational records.",
+      "columns": [
+        "id",
+        "form_title",
+        "category",
+        "fields_json",
+        "status",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "customers": {
+      "description": "Customers information and operational records.",
+      "columns": [
+        "id",
+        "customer",
+        "customer_code",
+        "email",
+        "phone_number",
+        "status",
+        "address",
+        "photo_url",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "billing_rate",
+        "contract_start",
+        "contract_end",
+        "sla_terms"
+      ],
+      "foreign_keys": []
+    },
+    "executive_bi_metrics": {
+      "description": "Executive Bi Metrics information and operational records.",
+      "columns": [
+        "id",
+        "metric_key",
+        "metric_value",
+        "metric_category",
+        "period_date",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "finance_integrations": {
+      "description": "Finance Integrations information and operational records.",
+      "columns": [
+        "id",
+        "platform",
+        "status",
+        "config_json",
+        "last_synced_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "guard_availabilities": {
+      "description": "Dated guard availability windows using start_at and end_at DATETIME values, not recurring time-only schedules. The live unique key allows one row per guard_id and day_of_week.",
+      "columns": [
+        "id",
+        "guard_id",
+        "day_of_week",
+        "start_at",
+        "end_at",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "guard_compliance": {
+      "description": "Guard Compliance information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "sia_license_number",
+        "sia_expiry_date",
+        "sia_status",
+        "dbs_certificate_number",
+        "dbs_issue_date",
+        "dbs_status",
+        "right_to_work_type",
+        "rtw_expiry_date",
+        "rtw_status",
+        "is_scheduling_blocked",
+        "notes",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "guard_documents": {
+      "description": "Guard Documents information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "document_type",
+        "document_name",
+        "file_url",
+        "expiry_date",
+        "status",
+        "uploaded_at"
+      ],
+      "foreign_keys": []
+    },
+    "guard_requests": {
+      "description": "Guard Requests information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "type",
+        "shift_id",
+        "target_shift_id",
+        "target_guard_id",
+        "start_date",
+        "end_date",
+        "reason",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "guard_telemetry": {
+      "description": "Guard Telemetry information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "latitude",
+        "longitude",
+        "battery_level",
+        "patrol_status",
+        "speed_kmh",
+        "last_ping_at"
+      ],
+      "foreign_keys": []
+    },
+    "guards": {
+      "description": "Guards information and operational records.",
+      "columns": [
+        "id",
+        "first_name",
+        "last_name",
+        "guard_code",
+        "email",
+        "gender",
+        "dob",
+        "phone_number",
+        "guard_passport",
+        "license_number",
+        "license_expiry",
+        "status",
+        "address",
+        "photo_url",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "emergency_contact",
+        "employment_status",
+        "pay_rate",
+        "skills",
+        "availability_preferences"
+      ],
+      "foreign_keys": []
+    },
+    "hazard_reports": {
+      "description": "Hazard Reports information and operational records.",
+      "columns": [
+        "id",
+        "hazard_code",
+        "site_id",
+        "guard_id",
+        "title",
+        "hazard_type",
+        "severity",
+        "status",
+        "notes",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "hr_employee_profiles": {
+      "description": "Hr Employee Profiles information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "job_title",
+        "tax_code",
+        "bank_sort_code",
+        "bank_account_number",
+        "emergency_contact_name",
+        "emergency_contact_phone",
+        "employment_type",
+        "onboarding_status",
+        "annual_leave_allowance",
+        "annual_leave_taken",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "incidents": {
+      "description": "Incidents information and operational records.",
+      "columns": [
+        "id",
+        "incident_code",
+        "site_id",
+        "reported_by_guard_id",
+        "title",
+        "category",
+        "severity",
+        "status",
+        "description",
+        "location_details",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "invoices": {
+      "description": "Invoices information and operational records.",
+      "columns": [
+        "id",
+        "invoice_number",
+        "customer_id",
+        "site_id",
+        "period_start",
+        "period_end",
+        "hours_billed",
+        "rate",
+        "total_amount",
+        "status",
+        "generated_from_attendance",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "leave_requests": {
+      "description": "Leave Requests information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "leave_type",
+        "start_date",
+        "end_date",
+        "total_days",
+        "reason",
+        "status",
+        "approved_by",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "media_files": {
+      "description": "Media Files information and operational records.",
+      "columns": [
+        "id",
+        "incident_id",
+        "file_name",
+        "file_type",
+        "file_url",
+        "file_size",
+        "uploaded_by",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "patrol_logs": {
+      "description": "Patrol Logs information and operational records.",
+      "columns": [
+        "id",
+        "site_id",
+        "guard_id",
+        "checkpoint_name",
+        "status",
+        "scanned_at",
+        "latitude",
+        "longitude",
+        "notes"
+      ],
+      "foreign_keys": []
+    },
+    "pay_rates": {
+      "description": "Pay Rates information and operational records.",
+      "columns": [
+        "id",
+        "role_name",
+        "site_id",
+        "day_rate",
+        "night_rate",
+        "holiday_rate",
+        "overtime_rate",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "payroll_entries": {
+      "description": "Payroll Entries information and operational records.",
+      "columns": [
+        "id",
+        "payroll_reference",
+        "guard_id",
+        "period_start",
+        "period_end",
+        "hours_worked",
+        "pay_rate",
+        "deductions",
+        "net_amount",
+        "status",
+        "generated_from_attendance",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "performance_reviews": {
+      "description": "Performance Reviews information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "reviewer_name",
+        "overall_rating",
+        "punctuality_score",
+        "conduct_score",
+        "feedback",
+        "review_date"
+      ],
+      "foreign_keys": []
+    },
+    "purchase_orders": {
+      "description": "Purchase Orders information and operational records.",
+      "columns": [
+        "id",
+        "po_number",
+        "supplier_id",
+        "order_date",
+        "total_amount",
+        "status",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "roles": {
+      "description": "Roles information and operational records.",
+      "columns": [
+        "id",
+        "role_code",
+        "role_name",
+        "sort_order",
+        "status",
+        "is_super_admin",
+        "permissions"
+      ],
+      "foreign_keys": []
+    },
+    "shift_assignments": {
+      "description": "Shift Assignments information and operational records.",
+      "columns": [
+        "id",
+        "shift_id",
+        "guard_id",
+        "created_by",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "shift_swap_requests": {
+      "description": "Shift Swap Requests information and operational records.",
+      "columns": [
+        "id",
+        "shift_id",
+        "requester_guard_id",
+        "target_guard_id",
+        "reason",
+        "status",
+        "manager_note",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "shifts": {
+      "description": "Shifts information and operational records.",
+      "columns": [
+        "id",
+        "shift_code",
+        "site_id",
+        "guard_id",
+        "start_at",
+        "end_at",
+        "break_minutes",
+        "status",
+        "instructions",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "site_sla_logs": {
+      "description": "Site Sla Logs information and operational records.",
+      "columns": [
+        "id",
+        "site_id",
+        "site_name",
+        "sla_target_pct",
+        "actual_performance_pct",
+        "status",
+        "audited_date",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "sites": {
+      "description": "Sites information and operational records.",
+      "columns": [
+        "id",
+        "site",
+        "site_code",
+        "status",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "customer_id",
+        "address",
+        "latitude",
+        "longitude",
+        "instructions",
+        "required_guard_count"
+      ],
+      "foreign_keys": []
+    },
+    "sos_alerts": {
+      "description": "Sos Alerts information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "site_id",
+        "latitude",
+        "longitude",
+        "status",
+        "triggered_at",
+        "resolved_at",
+        "notes"
+      ],
+      "foreign_keys": []
+    },
+    "subcontractors": {
+      "description": "Subcontractors information and operational records.",
+      "columns": [
+        "id",
+        "agency_name",
+        "contact_person",
+        "email",
+        "phone",
+        "hourly_rate",
+        "active_guards_count",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "supplier_invoices": {
+      "description": "Supplier Invoices information and operational records.",
+      "columns": [
+        "id",
+        "invoice_number",
+        "supplier_id",
+        "purchase_order_id",
+        "invoice_date",
+        "due_date",
+        "amount",
+        "status",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "suppliers": {
+      "description": "Suppliers information and operational records.",
+      "columns": [
+        "id",
+        "supplier_code",
+        "supplier",
+        "email",
+        "phone_number",
+        "address",
+        "payment_terms",
+        "status",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ],
+      "foreign_keys": []
+    },
+    "timesheets": {
+      "description": "Timesheets information and operational records.",
+      "columns": [
+        "id",
+        "shift_id",
+        "guard_id",
+        "site_id",
+        "clock_in",
+        "clock_out",
+        "break_minutes",
+        "regular_hours",
+        "overtime_hours",
+        "holiday_hours",
+        "pay_rate",
+        "charge_rate",
+        "gross_pay",
+        "gross_charge",
+        "status",
+        "approved_by",
+        "approved_at",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "training_records": {
+      "description": "Training Records information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "course_name",
+        "provider",
+        "completion_date",
+        "expiry_date",
+        "status",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "users": {
+      "description": "Users information and operational records.",
+      "columns": [
+        "user_id",
+        "user_code",
+        "name",
+        "email",
+        "password",
+        "role_type",
+        "photo_url",
+        "status",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "guard_id",
+        "role_id"
+      ],
+      "foreign_keys": []
+    },
+    "vehicle_inspections": {
+      "description": "Vehicle Inspections information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "vehicle_plate",
+        "vehicle_model",
+        "mileage",
+        "fuel_level",
+        "status",
+        "inspection_notes",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "visitor_logs": {
+      "description": "Visitor Logs information and operational records.",
+      "columns": [
+        "id",
+        "site_id",
+        "visitor_name",
+        "pass_number",
+        "host_person",
+        "company_name",
+        "entry_time",
+        "exit_time",
+        "status",
+        "notes"
+      ],
+      "foreign_keys": []
+    },
+    "welfare_checkins": {
+      "description": "Welfare Checkins information and operational records.",
+      "columns": [
+        "id",
+        "guard_id",
+        "interval_minutes",
+        "last_ping_at",
+        "status",
+        "notes"
+      ],
+      "foreign_keys": []
+    }
+  },
+  "relationships": []
+}

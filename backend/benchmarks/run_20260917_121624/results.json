@@ -1,0 +1,10 @@
+[
+  {
+    "number": 1,
+    "question": "How many guards are in the system?",
+    "expected_status": "ok",
+    "actual_status": "timeout",
+    "passed": false,
+    "wall_seconds": 180.043
+  }
+]

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Intent-Aware Text-to-SQL and Knowledge Query Pipeline</title>
+  <desc id="desc">Graph of the request pipeline, showing intent routing to database query, knowledge query, clarification, or terminal response paths.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8fafc"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity=".13"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 16px Arial, sans-serif; fill: #475569; }
+      .lane { font: 700 15px Arial, sans-serif; fill: #475569; letter-spacing: 1px; }
+      .node-title { font: 700 16px Arial, sans-serif; fill: #0f172a; }
+      .node-sub { font: 13px Arial, sans-serif; fill: #475569; }
+      .label { font: 700 12px Arial, sans-serif; fill: #475569; }
+      .edge { stroke: #64748b; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .edge-dashed { stroke: #64748b; stroke-width: 2.5; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+      .node { stroke-width: 1.5; filter: url(#shadow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="980" fill="url(#bg)"/>
+  <text x="70" y="62" class="title">Intent-Aware Text-to-SQL &amp; Knowledge Pipeline</text>
+  <text x="70" y="91" class="subtitle">Current LangGraph execution flow — database queries, knowledge routing, safety, and clarification</text>
+
+  <text x="75" y="150" class="lane">REQUEST INTAKE</text>
+  <line x1="75" y1="160" x2="1525" y2="160" stroke="#cbd5e1"/>
+  <text x="75" y="332" class="lane">INTENT ROUTING</text>
+  <line x1="75" y1="342" x2="1525" y2="342" stroke="#cbd5e1"/>
+  <text x="75" y="535" class="lane">DATABASE QUERY PATH</text>
+  <line x1="75" y1="545" x2="1525" y2="545" stroke="#cbd5e1"/>
+  <text x="75" y="838" class="lane">TERMINAL RESPONSES</text>
+  <line x1="75" y1="848" x2="1525" y2="848" stroke="#cbd5e1"/>
+
+  <!-- intake -->
+  <rect class="node" x="90" y="190" width="190" height="82" rx="14" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="185" y="223" text-anchor="middle" class="node-title">POST /ask</text>
+  <text x="185" y="247" text-anchor="middle" class="node-sub">question + conversation ID</text>
+  <rect class="node" x="380" y="190" width="230" height="82" rx="14" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="495" y="223" text-anchor="middle" class="node-title">Conversation context</text>
+  <text x="495" y="247" text-anchor="middle" class="node-sub">resolve prior clarification</text>
+  <rect class="node" x="720" y="190" width="270" height="82" rx="14" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="855" y="223" text-anchor="middle" class="node-title">Analyze intent · LLM #1</text>
+  <text x="855" y="247" text-anchor="middle" class="node-sub">route + completeness check</text>
+  <path class="edge" d="M280 231 H380"/>
+  <path class="edge" d="M610 231 H720"/>
+
+  <!-- router -->
+  <path class="node" d="M855 390 l105 70 -105 70 -105 -70 z" fill="#fef3c7" stroke="#d97706"/>
+  <text x="855" y="452" text-anchor="middle" class="node-title">Route intent</text>
+  <text x="855" y="475" text-anchor="middle" class="node-sub">confidence + completeness</text>
+  <path class="edge" d="M855 272 V390"/>
+
+  <!-- clarification -->
+  <rect class="node" x="105" y="398" width="250" height="82" rx="14" fill="#fef3c7" stroke="#d97706"/>
+  <text x="230" y="431" text-anchor="middle" class="node-title">Clarify</text>
+  <text x="230" y="455" text-anchor="middle" class="node-sub">missing required context</text>
+  <path class="edge" d="M750 460 H355"/>
+  <text x="515" y="447" text-anchor="middle" class="label">clarification needed</text>
+
+  <!-- knowledge -->
+  <rect class="node" x="1225" y="398" width="270" height="82" rx="14" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="1360" y="431" text-anchor="middle" class="node-title">Knowledge route</text>
+  <text x="1360" y="455" text-anchor="middle" class="node-sub">policy, SOP, document request</text>
+  <path class="edge" d="M960 460 H1225"/>
+  <text x="1095" y="447" text-anchor="middle" class="label">knowledge_query</text>
+
+  <!-- database -->
+  <rect class="node" x="90" y="585" width="210" height="82" rx="14" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="195" y="618" text-anchor="middle" class="node-title">Make plan · LLM #2</text>
+  <text x="195" y="642" text-anchor="middle" class="node-sub">tables, filters, ordering</text>
+  <rect class="node" x="370" y="585" width="210" height="82" rx="14" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="475" y="618" text-anchor="middle" class="node-title">Retrieve</text>
+  <text x="475" y="642" text-anchor="middle" class="node-sub">Chroma + schema + samples</text>
+  <rect class="node" x="650" y="585" width="230" height="82" rx="14" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="765" y="618" text-anchor="middle" class="node-title">Generate SQL · LLM</text>
+  <text x="765" y="642" text-anchor="middle" class="node-sub">safe read-only candidates</text>
+  <rect class="node" x="950" y="585" width="210" height="82" rx="14" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="1055" y="618" text-anchor="middle" class="node-title">Validate</text>
+  <text x="1055" y="642" text-anchor="middle" class="node-sub">SQL guard + EXPLAIN</text>
+  <rect class="node" x="1230" y="585" width="160" height="82" rx="14" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="1310" y="618" text-anchor="middle" class="node-title">Execute</text>
+  <text x="1310" y="642" text-anchor="middle" class="node-sub">read-only query</text>
+  <path class="edge" d="M855 530 V560 H195 V585"/>
+  <text x="530" y="552" text-anchor="middle" class="label">database_query</text>
+  <path class="edge" d="M300 626 H370"/><path class="edge" d="M580 626 H650"/><path class="edge" d="M880 626 H950"/><path class="edge" d="M1160 626 H1230"/>
+  <path class="edge-dashed" d="M1055 667 V730 H765 V667"/>
+  <text x="910" y="720" text-anchor="middle" class="label">no valid candidate → repair SQL → validate</text>
+
+  <!-- terminal -->
+  <rect class="node" x="100" y="877" width="230" height="68" rx="14" fill="#fef3c7" stroke="#d97706"/>
+  <text x="215" y="907" text-anchor="middle" class="node-title">clarification_required</text>
+  <text x="215" y="929" text-anchor="middle" class="node-sub">question returned to user</text>
+  <rect class="node" x="420" y="877" width="230" height="68" rx="14" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="535" y="907" text-anchor="middle" class="node-title">knowledge_not_found</text>
+  <text x="535" y="929" text-anchor="middle" class="node-sub">until knowledge is indexed</text>
+  <rect class="node" x="740" y="877" width="160" height="68" rx="14" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="820" y="907" text-anchor="middle" class="node-title">ok</text>
+  <text x="820" y="929" text-anchor="middle" class="node-sub">rows + SQL + answer</text>
+  <rect class="node" x="990" y="877" width="190" height="68" rx="14" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="1085" y="907" text-anchor="middle" class="node-title">unsafe_request</text>
+  <text x="1085" y="929" text-anchor="middle" class="node-sub">blocked data or write</text>
+  <rect class="node" x="1270" y="877" width="240" height="68" rx="14" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="1390" y="907" text-anchor="middle" class="node-title">out_of_scope / error</text>
+  <text x="1390" y="929" text-anchor="middle" class="node-sub">general chat or failed request</text>
+  <path class="edge" d="M230 480 V877"/>
+  <path class="edge" d="M1360 480 V780 H535 V877"/>
+  <path class="edge" d="M1310 667 V780 H820 V877"/>
+  <path class="edge" d="M990 460 V780 H1085 V877"/>
+  <path class="edge-dashed" d="M855 530 V780 H1390 V877"/>
+  <text x="1165" y="770" text-anchor="middle" class="label">general_chat · out_of_scope · failed validation</text>
+</svg>

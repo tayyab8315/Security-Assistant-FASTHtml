@@ -1,0 +1,18 @@
+User
+ |
+ ↓
+langdetect
+ |
+ ↓
+Is English?
+ |
+ No
+ |
+ ↓
+Argos Translate
+ |
+ ↓
+English Question
+ |
+ ↓
+Intent Agent

@@ -1,0 +1,34 @@
+{
+  "synonyms": [
+    {
+      "terms": [
+        "guard",
+        "security guard",
+        "guards"
+      ],
+      "maps_to": "guards"
+    },
+    {
+      "terms": [
+        "customer",
+        "client",
+        "customers",
+        "clients"
+      ],
+      "maps_to": "customers"
+    },
+    {
+      "terms": [
+        "site",
+        "location",
+        "security site"
+      ],
+      "maps_to": "sites"
+    }
+  ],
+  "rules": [
+    "Never query excluded system conversation tables unless explicitly allowed.",
+    "Use only verified schema relationships."
+  ],
+  "query_rules": {}
+}

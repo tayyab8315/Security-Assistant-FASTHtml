@@ -1,0 +1,473 @@
+[
+  {
+    "question": "How many guards are in the system?",
+    "sql": "SELECT COUNT(*) AS guard_count FROM guards",
+    "tables": [
+      "guards"
+    ],
+    "notes": "Simple count; no status interpretation."
+  },
+  {
+    "question": "Show guard names and emails.",
+    "sql": "SELECT first_name, last_name, email FROM guards ORDER BY id LIMIT 20",
+    "tables": [
+      "guards"
+    ],
+    "notes": "Return only requested names and emails; id supports ordering without being displayed. Blocked fields remain excluded."
+  },
+  {
+    "question": "List all sites.",
+    "sql": "SELECT site FROM sites ORDER BY id LIMIT 20",
+    "tables": [
+      "sites"
+    ],
+    "notes": "A broad list request returns the identifying name, not every field. Additional allowed details can be requested."
+  },
+  {
+    "question": "Find customers whose name contains Security.",
+    "sql": "SELECT customer FROM customers WHERE LOWER(customer) LIKE '%security%' ORDER BY id LIMIT 20",
+    "tables": [
+      "customers"
+    ],
+    "notes": "Return matching customer names without adding unrequested contact details or status."
+  },
+  {
+    "question": "How many users are there for each role?",
+    "sql": "SELECT role_type, COUNT(*) AS user_count FROM users GROUP BY role_type ORDER BY user_count DESC LIMIT 20",
+    "tables": [
+      "users"
+    ],
+    "notes": "Aggregation example."
+  },
+  {
+    "question": "How many records are in ai_operational_insights?",
+    "sql": "SELECT COUNT(*) AS record_count FROM ai_operational_insights",
+    "tables": [
+      "ai_operational_insights"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in attendance?",
+    "sql": "SELECT COUNT(*) AS record_count FROM attendance",
+    "tables": [
+      "attendance"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in charge_rates?",
+    "sql": "SELECT COUNT(*) AS record_count FROM charge_rates",
+    "tables": [
+      "charge_rates"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in client_contracts?",
+    "sql": "SELECT COUNT(*) AS record_count FROM client_contracts",
+    "tables": [
+      "client_contracts"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in custom_forms?",
+    "sql": "SELECT COUNT(*) AS record_count FROM custom_forms",
+    "tables": [
+      "custom_forms"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in executive_bi_metrics?",
+    "sql": "SELECT COUNT(*) AS record_count FROM executive_bi_metrics",
+    "tables": [
+      "executive_bi_metrics"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in guard_availabilities?",
+    "sql": "SELECT COUNT(*) AS record_count FROM guard_availabilities",
+    "tables": [
+      "guard_availabilities"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in guard_compliance?",
+    "sql": "SELECT COUNT(*) AS record_count FROM guard_compliance",
+    "tables": [
+      "guard_compliance"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in guard_documents?",
+    "sql": "SELECT COUNT(*) AS record_count FROM guard_documents",
+    "tables": [
+      "guard_documents"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in guard_requests?",
+    "sql": "SELECT COUNT(*) AS record_count FROM guard_requests",
+    "tables": [
+      "guard_requests"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in guard_telemetry?",
+    "sql": "SELECT COUNT(*) AS record_count FROM guard_telemetry",
+    "tables": [
+      "guard_telemetry"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in hazard_reports?",
+    "sql": "SELECT COUNT(*) AS record_count FROM hazard_reports",
+    "tables": [
+      "hazard_reports"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in hr_employee_profiles?",
+    "sql": "SELECT COUNT(*) AS record_count FROM hr_employee_profiles",
+    "tables": [
+      "hr_employee_profiles"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in incidents?",
+    "sql": "SELECT COUNT(*) AS record_count FROM incidents",
+    "tables": [
+      "incidents"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in invoices?",
+    "sql": "SELECT COUNT(*) AS record_count FROM invoices",
+    "tables": [
+      "invoices"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in leave_requests?",
+    "sql": "SELECT COUNT(*) AS record_count FROM leave_requests",
+    "tables": [
+      "leave_requests"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in media_files?",
+    "sql": "SELECT COUNT(*) AS record_count FROM media_files",
+    "tables": [
+      "media_files"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in patrol_logs?",
+    "sql": "SELECT COUNT(*) AS record_count FROM patrol_logs",
+    "tables": [
+      "patrol_logs"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in pay_rates?",
+    "sql": "SELECT COUNT(*) AS record_count FROM pay_rates",
+    "tables": [
+      "pay_rates"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in payroll_entries?",
+    "sql": "SELECT COUNT(*) AS record_count FROM payroll_entries",
+    "tables": [
+      "payroll_entries"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in performance_reviews?",
+    "sql": "SELECT COUNT(*) AS record_count FROM performance_reviews",
+    "tables": [
+      "performance_reviews"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in purchase_orders?",
+    "sql": "SELECT COUNT(*) AS record_count FROM purchase_orders",
+    "tables": [
+      "purchase_orders"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in shift_assignments?",
+    "sql": "SELECT COUNT(*) AS record_count FROM shift_assignments",
+    "tables": [
+      "shift_assignments"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in shift_swap_requests?",
+    "sql": "SELECT COUNT(*) AS record_count FROM shift_swap_requests",
+    "tables": [
+      "shift_swap_requests"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in shifts?",
+    "sql": "SELECT COUNT(*) AS record_count FROM shifts",
+    "tables": [
+      "shifts"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in site_sla_logs?",
+    "sql": "SELECT COUNT(*) AS record_count FROM site_sla_logs",
+    "tables": [
+      "site_sla_logs"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in sos_alerts?",
+    "sql": "SELECT COUNT(*) AS record_count FROM sos_alerts",
+    "tables": [
+      "sos_alerts"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in subcontractors?",
+    "sql": "SELECT COUNT(*) AS record_count FROM subcontractors",
+    "tables": [
+      "subcontractors"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in supplier_invoices?",
+    "sql": "SELECT COUNT(*) AS record_count FROM supplier_invoices",
+    "tables": [
+      "supplier_invoices"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in suppliers?",
+    "sql": "SELECT COUNT(*) AS record_count FROM suppliers",
+    "tables": [
+      "suppliers"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in timesheets?",
+    "sql": "SELECT COUNT(*) AS record_count FROM timesheets",
+    "tables": [
+      "timesheets"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in training_records?",
+    "sql": "SELECT COUNT(*) AS record_count FROM training_records",
+    "tables": [
+      "training_records"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in vehicle_inspections?",
+    "sql": "SELECT COUNT(*) AS record_count FROM vehicle_inspections",
+    "tables": [
+      "vehicle_inspections"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in visitor_logs?",
+    "sql": "SELECT COUNT(*) AS record_count FROM visitor_logs",
+    "tables": [
+      "visitor_logs"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "How many records are in welfare_checkins?",
+    "sql": "SELECT COUNT(*) AS record_count FROM welfare_checkins",
+    "tables": [
+      "welfare_checkins"
+    ],
+    "notes": "Single-table count; no inferred joins, status mappings or sensitive fields."
+  },
+  {
+    "question": "List scheduled shifts ordered by start time.",
+    "sql": "SELECT id, shift_code, start_at, end_at, status FROM shifts WHERE status = 'scheduled' ORDER BY start_at LIMIT 100",
+    "tables": [
+      "shifts"
+    ],
+    "notes": "Uses a declared enum and returns identifiers without guessing joins."
+  },
+  {
+    "question": "How many attendance records are there for each status?",
+    "sql": "SELECT status, COUNT(*) AS attendance_count FROM attendance GROUP BY status ORDER BY attendance_count DESC LIMIT 100",
+    "tables": [
+      "attendance"
+    ],
+    "notes": "Reports recorded status literals."
+  },
+  {
+    "question": "List open high or critical severity incidents.",
+    "sql": "SELECT id, incident_code, title, severity, status, created_at FROM incidents WHERE status = 'open' AND severity IN ('high', 'critical') ORDER BY created_at DESC LIMIT 100",
+    "tables": [
+      "incidents"
+    ],
+    "notes": "Uses declared enums."
+  },
+  {
+    "question": "List overdue customer invoices.",
+    "sql": "SELECT id, invoice_number, customer_id, total_amount, status FROM invoices WHERE status = 'overdue' ORDER BY id LIMIT 100",
+    "tables": [
+      "invoices"
+    ],
+    "notes": "Customer invoices, not supplier invoices; currency is unspecified."
+  },
+  {
+    "question": "List compliance expiry dates and statuses.",
+    "sql": "SELECT guard_id, sia_expiry_date, sia_status, rtw_expiry_date, rtw_status FROM guard_compliance ORDER BY guard_id LIMIT 100",
+    "tables": [
+      "guard_compliance"
+    ],
+    "notes": "Excludes document numbers and private notes."
+  },
+  {
+    "question": "List sites with their customer names.",
+    "sql": "SELECT s.id, s.site, c.customer FROM sites s LEFT JOIN customers c ON s.customer_id = c.id ORDER BY s.id LIMIT 100",
+    "tables": [
+      "sites",
+      "customers"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show contracts with their site and customer names.",
+    "sql": "SELECT cc.id, cc.contract_title, s.site, c.customer FROM client_contracts cc LEFT JOIN sites s ON cc.site_id = s.id LEFT JOIN customers c ON s.customer_id = c.id ORDER BY cc.id LIMIT 100",
+    "tables": [
+      "client_contracts",
+      "sites",
+      "customers"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Count sites for every customer, including customers with no sites.",
+    "sql": "SELECT c.id, c.customer, COUNT(s.id) AS site_count FROM customers c LEFT JOIN sites s ON s.customer_id = c.id GROUP BY c.id, c.customer ORDER BY c.id LIMIT 100",
+    "tables": [
+      "customers",
+      "sites"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show attendance records with guard names and shift start times.",
+    "sql": "SELECT a.id, g.first_name, g.last_name, s.start_at, a.status FROM attendance a LEFT JOIN guards g ON a.guard_id = g.id LEFT JOIN shifts s ON a.shift_id = s.id ORDER BY a.id LIMIT 100",
+    "tables": [
+      "attendance",
+      "guards",
+      "shifts"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show shift assignments with shift codes and guard names.",
+    "sql": "SELECT a.id, s.shift_code, g.first_name, g.last_name FROM shift_assignments a JOIN shifts s ON a.shift_id = s.id JOIN guards g ON a.guard_id = g.id ORDER BY a.id LIMIT 100",
+    "tables": [
+      "shift_assignments",
+      "shifts",
+      "guards"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show incidents with the reporting guard names.",
+    "sql": "SELECT i.id, i.title, g.first_name, g.last_name FROM incidents i LEFT JOIN guards g ON i.reported_by_guard_id = g.id ORDER BY i.id LIMIT 100",
+    "tables": [
+      "incidents",
+      "guards"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show guard requests with requester and target guard names.",
+    "sql": "SELECT r.id, requester.first_name AS requester_first_name, requester.last_name AS requester_last_name, target.first_name AS target_first_name, target.last_name AS target_last_name, r.status FROM guard_requests r LEFT JOIN guards requester ON r.guard_id = requester.id LEFT JOIN guards target ON r.target_guard_id = target.id ORDER BY r.id LIMIT 100",
+    "tables": [
+      "guard_requests",
+      "guards"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show supplier invoices with supplier names and purchase order numbers.",
+    "sql": "SELECT i.id, i.invoice_number, s.supplier, p.po_number, i.amount FROM supplier_invoices i LEFT JOIN suppliers s ON i.supplier_id = s.id LEFT JOIN purchase_orders p ON i.purchase_order_id = p.id ORDER BY i.id LIMIT 100",
+    "tables": [
+      "supplier_invoices",
+      "suppliers",
+      "purchase_orders"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show system user names and their linked guard names.",
+    "sql": "SELECT u.user_id, u.name, g.first_name, g.last_name FROM users u LEFT JOIN guards g ON u.guard_id = g.id ORDER BY u.user_id LIMIT 100",
+    "tables": [
+      "users",
+      "guards"
+    ],
+    "notes": "Uses owner-confirmed business_schema relationships, explicit safe columns and role aliases; no database foreign keys required."
+  },
+  {
+    "question": "Show unassigned shifts.",
+    "sql": "SELECT s.id, s.shift_code, s.start_at, s.end_at FROM shifts s WHERE NOT EXISTS (SELECT 1 FROM shift_assignments a WHERE a.shift_id = s.id) ORDER BY s.start_at LIMIT 100",
+    "tables": [
+      "shifts",
+      "shift_assignments"
+    ]
+  },
+  {
+    "question": "Show all sites assigned to guard with first name Ali.",
+    "sql": "SELECT DISTINCT st.id, st.site, st.site_code FROM guards g JOIN shift_assignments a ON a.guard_id = g.id JOIN shifts s ON a.shift_id = s.id JOIN sites st ON s.site_id = st.id WHERE LOWER(g.first_name) = 'ali' ORDER BY st.site LIMIT 100",
+    "tables": [
+      "guards",
+      "shift_assignments",
+      "shifts",
+      "sites"
+    ]
+  },
+  {
+    "question": "Show recorded guard availability windows starting on 2026-09-25.",
+    "sql": "SELECT id, guard_id, day_of_week, start_at, end_at, status FROM guard_availabilities WHERE start_at >= '2026-09-25 00:00:00' AND start_at < '2026-09-26 00:00:00' ORDER BY start_at, id LIMIT 20",
+    "tables": [
+      "guard_availabilities"
+    ],
+    "notes": "Uses full DATETIME boundaries; displays recorded status without assuming shift-conflict checks or recurring weekly availability."
+  }
+]

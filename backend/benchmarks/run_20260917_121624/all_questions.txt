@@ -1,0 +1,28 @@
+50-question benchmark
+Project: D:\Tayyab\AI\s_demo_text2sql_google - Copy
+Each question is independent; invokes the same /ask handler directly to capture terminal steps.
+PASS means expected status matched; SQL/result correctness requires manual review.
+Timeout: 180 seconds per question. This combined log is updated and flushed after each question.
+
+Question 1/50: How many guards are in the system?
+Expected status: ok
+[Request 2d8b08e5] START | Processing question
+[Request 2d8b08e5] Step 1: Resolve conversation context | START | LLM call: No
+[Request 2d8b08e5] Step 1: Resolve conversation context | DONE | LLM call: No (0) | Embedding calls: 0 | Response time: 0.000s
+[Request 2d8b08e5] Step 2: Analyze intent | START | LLM call: Yes
+[Request 2d8b08e5] Step 2: LLM call 1 (IntentUnderstanding, attempt 1) | START
+[Request 2d8b08e5] Step 2: LLM call 1 (IntentUnderstanding, attempt 1) | DONE | Response time: 6.100s
+[Request 2d8b08e5] Step 2: Analyze intent | DONE | LLM call: Yes (1) | Embedding calls: 0 | Response time: 14.752s
+[Request 2d8b08e5] Step 3: Make plan | START | LLM call: Yes
+[Request 2d8b08e5] Step 3: LLM call 2 (QueryPlan, attempt 1) | START
+[Request 2d8b08e5] Step 3: LLM call 2 (QueryPlan, attempt 1) | DONE | Response time: 101.001s
+[Request 2d8b08e5] Step 3: Make plan | DONE | LLM call: Yes (1) | Embedding calls: 0 | Response time: 109.047s
+[Request 2d8b08e5] Step 4: Retrieve | START | LLM call: No
+[Request 2d8b08e5] Step 4: Embedding call 1 (1 texts) | START
+[Request 2d8b08e5] Step 4: Embedding call 1 (1 texts) | DONE | Response time: 1.481s
+
+BENCHMARK TIMEOUT: worker stopped after 180 seconds.
+
+BENCHMARK RESULT: FAIL | Actual: timeout | Wall time including worker startup: 180.043s
+
+================================================================================
